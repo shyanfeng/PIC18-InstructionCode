@@ -1,0 +1,25 @@
+---
+:source:
+  :path: test
+  :file: test_incf.c
+:successes:
+- :test: test_incf_should_increment_fileReg_and_store_in_fileReg
+  :line: 8
+  :message: ''
+- :test: test_incf_should_increment_fileReg_and_store_in_WREG
+  :line: 29
+  :message: ''
+- :test: test_incf_should_increment_fileReg_and_select_BSR_and_store_in_fileReg
+  :line: 51
+  :message: ''
+- :test: test_incf_should_increment_fileReg_and_select_BSR_and_store_in_WREG
+  :line: 74
+  :message: ''
+:failures: []
+:ignores: []
+:counts:
+  :total: 4
+  :passed: 4
+  :failed: 0
+  :ignored: 0
+:stdout: []
