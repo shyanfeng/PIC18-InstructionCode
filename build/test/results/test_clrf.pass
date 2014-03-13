@@ -4,16 +4,22 @@
   :file: test_clrf.c
 :successes:
 - :test: test_clrf_should_clear_fileReg
-  :line: 8
+  :line: 9
   :message: ''
 - :test: test_clrf_should_clear_BSR
-  :line: 27
+  :line: 29
+  :message: ''
+- :test: test_clrf_should_throw_exception_error_BSR_more_than_15
+  :line: 50
+  :message: ''
+- :test: test_clrf_operand1_should_throw_exception_more_than_255_or_less_than_0
+  :line: 78
   :message: ''
 :failures: []
 :ignores: []
 :counts:
-  :total: 2
-  :passed: 2
+  :total: 4
+  :passed: 4
   :failed: 0
   :ignored: 0
 :stdout: []

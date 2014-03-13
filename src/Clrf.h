@@ -4,7 +4,7 @@
 #define WREG	0xf8b
 #define	BSR 	0xFE0
 
-extern char FSR[];
+extern unsigned char FSR[];
 
 void clrf(Bytecode *code);
 

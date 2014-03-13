@@ -8,8 +8,11 @@
   Unity.NumberOfTests++; \
   if (TEST_PROTECT()) \
   { \
+    CEXCEPTION_T e; \
+    Try { \
       setUp(); \
       TestFunc(); \
+    } Catch(e) { TEST_ASSERT_EQUAL_HEX32_MESSAGE(CEXCEPTION_NONE, e, "Unhandled Exception!"); } \
   } \
   if (TEST_PROTECT() && !TEST_IS_IGNORED) \
   { \
@@ -22,6 +25,7 @@
 #include "unity.h"
 #include <setjmp.h>
 #include <stdio.h>
+#include "CException.h"
 
 int GlobalExpectCount;
 int GlobalVerifyOrder;
@@ -32,6 +36,8 @@ extern void setUp(void);
 extern void tearDown(void);
 extern void test_clrf_should_clear_fileReg(void);
 extern void test_clrf_should_clear_BSR(void);
+extern void test_clrf_should_throw_exception_error_BSR_more_than_15(void);
+extern void test_clrf_operand1_should_throw_exception_more_than_255_or_less_than_0(void);
 
 
 //=======Test Reset Option=====
@@ -47,8 +53,10 @@ int main(void)
 {
   Unity.TestFile = "test_clrf.c";
   UnityBegin();
-  RUN_TEST(test_clrf_should_clear_fileReg, 8);
-  RUN_TEST(test_clrf_should_clear_BSR, 27);
+  RUN_TEST(test_clrf_should_clear_fileReg, 9);
+  RUN_TEST(test_clrf_should_clear_BSR, 29);
+  RUN_TEST(test_clrf_should_throw_exception_error_BSR_more_than_15, 50);
+  RUN_TEST(test_clrf_operand1_should_throw_exception_more_than_255_or_less_than_0, 78);
 
   return (UnityEnd());
 }

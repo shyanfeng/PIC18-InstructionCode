@@ -4,22 +4,28 @@
   :file: test_incf.c
 :successes:
 - :test: test_incf_should_increment_fileReg_and_store_in_fileReg
-  :line: 8
+  :line: 9
   :message: ''
 - :test: test_incf_should_increment_fileReg_and_store_in_WREG
-  :line: 29
+  :line: 30
   :message: ''
 - :test: test_incf_should_increment_fileReg_and_select_BSR_and_store_in_fileReg
-  :line: 51
+  :line: 52
   :message: ''
 - :test: test_incf_should_increment_fileReg_and_select_BSR_and_store_in_WREG
-  :line: 74
+  :line: 75
+  :message: ''
+- :test: test_incf_should_throw_exception_error_BSR_more_than_15
+  :line: 99
+  :message: ''
+- :test: test_incf_operand1_should_throw_exception_error_more_than_255_or_less_than_0
+  :line: 126
   :message: ''
 :failures: []
 :ignores: []
 :counts:
-  :total: 4
-  :passed: 4
+  :total: 6
+  :passed: 6
   :failed: 0
   :ignored: 0
 :stdout: []

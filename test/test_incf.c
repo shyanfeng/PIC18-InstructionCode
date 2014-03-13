@@ -1,6 +1,7 @@
 #include "unity.h"
 #include "Bytecode.h"
 #include "Incf.h"
+#include "CException.h"
 
 void setUp() {}
 void tearDown() {}
@@ -93,4 +94,57 @@ void test_incf_should_increment_fileReg_and_select_BSR_and_store_in_WREG() {
   // Unit test
   TEST_ASSERT_EQUAL_HEX8(56, FSR[code.operand1+(FSR[BSR]<<8)]);
   TEST_ASSERT_EQUAL_HEX8(57, FSR[WREG]);
+}
+
+void test_incf_should_throw_exception_error_BSR_more_than_15() {
+
+  ExceptionError exception;
+
+  // Create test fixture
+  Instruction inst = {
+                      .mnemonic = INCF,
+                      .name = "incf"
+                     };	
+  Bytecode code = { .instruction = &inst,
+                    .operand1 = 0xB2,
+					.operand2 = 0,
+					.operand3 = 1
+                  };
+	
+  // Test incf of the bytecode
+  FSR[BSR] = 0xff;
+  
+  Try{
+	incf(&code);
+  }
+  Catch(exception){
+	TEST_ASSERT_EQUAL(ERROR_BSR, exception);
+  }
+
+}
+
+void test_incf_operand1_should_throw_exception_error_more_than_255_or_less_than_0() {
+
+  ExceptionError exception;
+
+  // Create test fixture
+  Instruction inst = {
+                      .mnemonic = INCF,
+                      .name = "incf"
+                     };	
+  Bytecode code = { .instruction = &inst,
+                    .operand1 = 0xfff,
+					.operand2 = 0,
+					.operand3 = 1
+                  };
+	
+  // Test incf of the bytecode
+  
+  Try{
+	incf(&code);
+  }
+  Catch(exception){
+	TEST_ASSERT_EQUAL(ERROR_RANGE, exception);
+  }
+
 }

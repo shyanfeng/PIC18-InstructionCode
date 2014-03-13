@@ -1,6 +1,11 @@
 #ifndef	__BYTECODE_H__
 #define	__BYTECODE_H__
 
+typedef enum	{
+					ERROR_RANGE,
+					ERROR_BSR,
+				}ExceptionError;
+
 typedef enum 	{
 					CLRF,
 					CPFSLT,

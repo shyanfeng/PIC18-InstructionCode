@@ -8,8 +8,11 @@
   Unity.NumberOfTests++; \
   if (TEST_PROTECT()) \
   { \
+    CEXCEPTION_T e; \
+    Try { \
       setUp(); \
       TestFunc(); \
+    } Catch(e) { TEST_ASSERT_EQUAL_HEX32_MESSAGE(CEXCEPTION_NONE, e, "Unhandled Exception!"); } \
   } \
   if (TEST_PROTECT() && !TEST_IS_IGNORED) \
   { \
@@ -22,6 +25,7 @@
 #include "unity.h"
 #include <setjmp.h>
 #include <stdio.h>
+#include "CException.h"
 
 int GlobalExpectCount;
 int GlobalVerifyOrder;
@@ -34,6 +38,8 @@ extern void test_incf_should_increment_fileReg_and_store_in_fileReg(void);
 extern void test_incf_should_increment_fileReg_and_store_in_WREG(void);
 extern void test_incf_should_increment_fileReg_and_select_BSR_and_store_in_fileReg(void);
 extern void test_incf_should_increment_fileReg_and_select_BSR_and_store_in_WREG(void);
+extern void test_incf_should_throw_exception_error_BSR_more_than_15(void);
+extern void test_incf_operand1_should_throw_exception_error_more_than_255_or_less_than_0(void);
 
 
 //=======Test Reset Option=====
@@ -49,10 +55,12 @@ int main(void)
 {
   Unity.TestFile = "test_incf.c";
   UnityBegin();
-  RUN_TEST(test_incf_should_increment_fileReg_and_store_in_fileReg, 8);
-  RUN_TEST(test_incf_should_increment_fileReg_and_store_in_WREG, 29);
-  RUN_TEST(test_incf_should_increment_fileReg_and_select_BSR_and_store_in_fileReg, 51);
-  RUN_TEST(test_incf_should_increment_fileReg_and_select_BSR_and_store_in_WREG, 74);
+  RUN_TEST(test_incf_should_increment_fileReg_and_store_in_fileReg, 9);
+  RUN_TEST(test_incf_should_increment_fileReg_and_store_in_WREG, 30);
+  RUN_TEST(test_incf_should_increment_fileReg_and_select_BSR_and_store_in_fileReg, 52);
+  RUN_TEST(test_incf_should_increment_fileReg_and_select_BSR_and_store_in_WREG, 75);
+  RUN_TEST(test_incf_should_throw_exception_error_BSR_more_than_15, 99);
+  RUN_TEST(test_incf_operand1_should_throw_exception_error_more_than_255_or_less_than_0, 126);
 
   return (UnityEnd());
 }
