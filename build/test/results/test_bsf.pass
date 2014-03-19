@@ -1,0 +1,76 @@
+---
+:source:
+  :path: test
+  :file: test_bsf.c
+:successes:
+- :test: test_bcf_should_clear_seventh_bit_to_0
+  :line: 9
+  :message: ''
+- :test: test_bcf_should_clear_sixth_bit_to_0
+  :line: 29
+  :message: ''
+- :test: test_bcf_should_clear_fifth_bit_to_0
+  :line: 49
+  :message: ''
+- :test: test_bcf_should_clear_fourth_bit_to_0
+  :line: 69
+  :message: ''
+- :test: test_bcf_should_clear_third_bit_to_0
+  :line: 89
+  :message: ''
+- :test: test_bcf_should_clear_second_bit_to_0
+  :line: 109
+  :message: ''
+- :test: test_bcf_should_clear_first_bit_to_0
+  :line: 129
+  :message: ''
+- :test: test_bcf_should_clear_zero_bit_to_0
+  :line: 149
+  :message: ''
+- :test: test_bcf_should_clear_seventh_bit_to_0_BSR
+  :line: 169
+  :message: ''
+- :test: test_bcf_should_clear_sixth_bit_to_0_BSR
+  :line: 190
+  :message: ''
+- :test: test_bcf_should_clear_fifth_bit_to_0_BSR
+  :line: 211
+  :message: ''
+- :test: test_bcf_should_clear_fourth_bit_to_0_BSR
+  :line: 232
+  :message: ''
+- :test: test_bcf_should_clear_third_bit_to_0_BSR
+  :line: 253
+  :message: ''
+- :test: test_bcf_should_clear_second_bit_to_0_BSR
+  :line: 274
+  :message: ''
+- :test: test_bcf_should_clear_first_bit_to_0_BSR
+  :line: 295
+  :message: ''
+- :test: test_bcf_should_clear_zero_bit_to_0_BSR
+  :line: 316
+  :message: ''
+- :test: test_bcf_should_throw_exception_error_BSR_more_than_15
+  :line: 337
+  :message: ''
+- :test: test_bcf_operand1_should_throw_exception_error_more_than_255_or_less_than_0
+  :line: 364
+  :message: ''
+- :test: test_bcf_operand3_has_valid_value_while_operand2_is_negative_1_should_throw_exception_error
+  :line: 388
+  :message: ''
+- :test: test_bcf_operand2_has_valid_value_while_operand3_is_negative_1_should_throw_exception_error
+  :line: 412
+  :message: ''
+- :test: test_bcf_operand2_and_operand3_is_negative_1_should_throw_exception_error
+  :line: 436
+  :message: ''
+:failures: []
+:ignores: []
+:counts:
+  :total: 21
+  :passed: 21
+  :failed: 0
+  :ignored: 0
+:stdout: []

@@ -136,9 +136,7 @@ void test_clrf_should_throw_exception_error_BSR_more_than_15() {
 
   else { } CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); } else { exception = CExceptionFrames[MY_ID].Exception; exception=exception; } CExceptionFrames[MY_ID].pFrame = PrevFrame; } if (CExceptionFrames[(0)].Exception != (0x5A5A5A5A)){
 
-
-
- UnityAssertEqualNumber((_U_SINT)((ERROR_BSR)), (_U_SINT)((exception)), (((void *)0)), (_U_UINT)73, UNITY_DISPLAY_STYLE_INT);
+ UnityAssertEqualNumber((_U_SINT)((ERROR_BSR)), (_U_SINT)((exception)), (((void *)0)), (_U_UINT)72, UNITY_DISPLAY_STYLE_INT);
 
   }
 
@@ -148,7 +146,7 @@ void test_clrf_should_throw_exception_error_BSR_more_than_15() {
 
 
 
-void test_clrf_operand1_should_throw_exception_more_than_255_or_less_than_0(){
+void test_clrf_operand1_should_throw_exception_error_more_than_255_or_less_than_0(){
 
   ExceptionError exception;
 
@@ -188,9 +186,151 @@ void test_clrf_operand1_should_throw_exception_more_than_255_or_less_than_0(){
 
   else { } CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); } else { exception = CExceptionFrames[MY_ID].Exception; exception=exception; } CExceptionFrames[MY_ID].pFrame = PrevFrame; } if (CExceptionFrames[(0)].Exception != (0x5A5A5A5A)){
 
+ UnityAssertEqualNumber((_U_SINT)((ERROR_RANGE)), (_U_SINT)((exception)), (((void *)0)), (_U_UINT)97, UNITY_DISPLAY_STYLE_INT);
+
+  }
+
+}
 
 
- UnityAssertEqualNumber((_U_SINT)((ERROR_RANGE)), (_U_SINT)((exception)), (((void *)0)), (_U_UINT)99, UNITY_DISPLAY_STYLE_INT);
+
+void test_clrf_operand2_has_valid_value_while_operand3_is_negative_1_should_throw_exception_error(){
+
+  ExceptionError exception;
+
+
+
+
+
+  Instruction inst = {
+
+                      .mnemonic = CLRF,
+
+                      .name = "clrf"
+
+                     };
+
+  Bytecode code = { .instruction = &inst,
+
+                    .operand1 = 0x2A,
+
+     .operand2 = 0,
+
+     .operand3 = -1
+
+                  };
+
+
+
+
+
+
+
+  { jmp_buf *PrevFrame, NewFrame; unsigned int MY_ID = (0); PrevFrame = CExceptionFrames[(0)].pFrame; CExceptionFrames[MY_ID].pFrame = (jmp_buf*)(&NewFrame); CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); if (_setjmp(NewFrame) == 0) { if (&PrevFrame){
+
+ clrf(&code);
+
+  }
+
+  else { } CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); } else { exception = CExceptionFrames[MY_ID].Exception; exception=exception; } CExceptionFrames[MY_ID].pFrame = PrevFrame; } if (CExceptionFrames[(0)].Exception != (0x5A5A5A5A)){
+
+ UnityAssertEqualNumber((_U_SINT)((ERROR_OPERAND2andOPERAND3)), (_U_SINT)((exception)), (((void *)0)), (_U_UINT)121, UNITY_DISPLAY_STYLE_INT);
+
+  }
+
+}
+
+
+
+void test_clrf_operand2_and_operand3_is_negative_1_should_throw_exception_error(){
+
+  ExceptionError exception;
+
+
+
+
+
+  Instruction inst = {
+
+                      .mnemonic = CLRF,
+
+                      .name = "clrf"
+
+                     };
+
+  Bytecode code = { .instruction = &inst,
+
+                    .operand1 = 0x7D,
+
+     .operand2 = -1,
+
+     .operand3 = -1
+
+                  };
+
+
+
+
+
+
+
+  { jmp_buf *PrevFrame, NewFrame; unsigned int MY_ID = (0); PrevFrame = CExceptionFrames[(0)].pFrame; CExceptionFrames[MY_ID].pFrame = (jmp_buf*)(&NewFrame); CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); if (_setjmp(NewFrame) == 0) { if (&PrevFrame){
+
+ clrf(&code);
+
+  }
+
+  else { } CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); } else { exception = CExceptionFrames[MY_ID].Exception; exception=exception; } CExceptionFrames[MY_ID].pFrame = PrevFrame; } if (CExceptionFrames[(0)].Exception != (0x5A5A5A5A)){
+
+ UnityAssertEqualNumber((_U_SINT)((ERROR_OPERAND3)), (_U_SINT)((exception)), (((void *)0)), (_U_UINT)145, UNITY_DISPLAY_STYLE_INT);
+
+  }
+
+}
+
+
+
+void test_clrf_operand2_and_operand3_has_valid_value_should_throw_exception_error(){
+
+  ExceptionError exception;
+
+
+
+
+
+  Instruction inst = {
+
+                      .mnemonic = CLRF,
+
+                      .name = "clrf"
+
+                     };
+
+  Bytecode code = { .instruction = &inst,
+
+                    .operand1 = 0x7D,
+
+     .operand2 = 1,
+
+     .operand3 = 1
+
+                  };
+
+
+
+
+
+
+
+  { jmp_buf *PrevFrame, NewFrame; unsigned int MY_ID = (0); PrevFrame = CExceptionFrames[(0)].pFrame; CExceptionFrames[MY_ID].pFrame = (jmp_buf*)(&NewFrame); CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); if (_setjmp(NewFrame) == 0) { if (&PrevFrame){
+
+ clrf(&code);
+
+  }
+
+  else { } CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); } else { exception = CExceptionFrames[MY_ID].Exception; exception=exception; } CExceptionFrames[MY_ID].pFrame = PrevFrame; } if (CExceptionFrames[(0)].Exception != (0x5A5A5A5A)){
+
+ UnityAssertEqualNumber((_U_SINT)((ERROR_OPERAND2)), (_U_SINT)((exception)), (((void *)0)), (_U_UINT)169, UNITY_DISPLAY_STYLE_INT);
 
   }
 

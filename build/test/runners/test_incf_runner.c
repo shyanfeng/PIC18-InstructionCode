@@ -40,6 +40,9 @@ extern void test_incf_should_increment_fileReg_and_select_BSR_and_store_in_fileR
 extern void test_incf_should_increment_fileReg_and_select_BSR_and_store_in_WREG(void);
 extern void test_incf_should_throw_exception_error_BSR_more_than_15(void);
 extern void test_incf_operand1_should_throw_exception_error_more_than_255_or_less_than_0(void);
+extern void test_incf_operand2_and_operand3_is_negative_1_should_throw_exception_error(void);
+extern void test_incf_operand3_has_valid_value_while_operand2_is_negative_1_should_throw_exception_error(void);
+extern void test_incf_operand1_has_valid_value_while_operand2_is_negative_1_should_throw_exception_error(void);
 
 
 //=======Test Reset Option=====
@@ -61,6 +64,9 @@ int main(void)
   RUN_TEST(test_incf_should_increment_fileReg_and_select_BSR_and_store_in_WREG, 75);
   RUN_TEST(test_incf_should_throw_exception_error_BSR_more_than_15, 99);
   RUN_TEST(test_incf_operand1_should_throw_exception_error_more_than_255_or_less_than_0, 126);
+  RUN_TEST(test_incf_operand2_and_operand3_is_negative_1_should_throw_exception_error, 151);
+  RUN_TEST(test_incf_operand3_has_valid_value_while_operand2_is_negative_1_should_throw_exception_error, 176);
+  RUN_TEST(test_incf_operand1_has_valid_value_while_operand2_is_negative_1_should_throw_exception_error, 201);
 
   return (UnityEnd());
 }

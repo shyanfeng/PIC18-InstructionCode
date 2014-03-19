@@ -21,11 +21,20 @@
 - :test: test_incf_operand1_should_throw_exception_error_more_than_255_or_less_than_0
   :line: 126
   :message: ''
+- :test: test_incf_operand2_and_operand3_is_negative_1_should_throw_exception_error
+  :line: 151
+  :message: ''
+- :test: test_incf_operand3_has_valid_value_while_operand2_is_negative_1_should_throw_exception_error
+  :line: 176
+  :message: ''
+- :test: test_incf_operand1_has_valid_value_while_operand2_is_negative_1_should_throw_exception_error
+  :line: 201
+  :message: ''
 :failures: []
 :ignores: []
 :counts:
-  :total: 6
-  :passed: 6
+  :total: 9
+  :passed: 9
   :failed: 0
   :ignored: 0
 :stdout: []

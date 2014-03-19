@@ -290,6 +290,154 @@ void test_incf_operand1_should_throw_exception_error_more_than_255_or_less_than_
 
   }
 
+}
 
+
+
+void test_incf_operand2_and_operand3_is_negative_1_should_throw_exception_error() {
+
+
+
+  ExceptionError exception;
+
+
+
+
+
+  Instruction inst = {
+
+                      .mnemonic = INCF,
+
+                      .name = "incf"
+
+                     };
+
+  Bytecode code = { .instruction = &inst,
+
+                    .operand1 = 0x3f,
+
+     .operand2 = -1,
+
+     .operand3 = -1
+
+                  };
+
+
+
+
+
+
+
+  { jmp_buf *PrevFrame, NewFrame; unsigned int MY_ID = (0); PrevFrame = CExceptionFrames[(0)].pFrame; CExceptionFrames[MY_ID].pFrame = (jmp_buf*)(&NewFrame); CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); if (_setjmp(NewFrame) == 0) { if (&PrevFrame){
+
+ incf(&code);
+
+  }
+
+  else { } CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); } else { exception = CExceptionFrames[MY_ID].Exception; exception=exception; } CExceptionFrames[MY_ID].pFrame = PrevFrame; } if (CExceptionFrames[(0)].Exception != (0x5A5A5A5A)){
+
+ UnityAssertEqualNumber((_U_SINT)((ERROR_OPERAND2andOPERAND3)), (_U_SINT)((exception)), (((void *)0)), (_U_UINT)172, UNITY_DISPLAY_STYLE_INT);
+
+  }
+
+}
+
+
+
+void test_incf_operand3_has_valid_value_while_operand2_is_negative_1_should_throw_exception_error() {
+
+
+
+  ExceptionError exception;
+
+
+
+
+
+  Instruction inst = {
+
+                      .mnemonic = INCF,
+
+                      .name = "incf"
+
+                     };
+
+  Bytecode code = { .instruction = &inst,
+
+                    .operand1 = 0x23,
+
+     .operand2 = -1,
+
+     .operand3 = 1
+
+                  };
+
+
+
+
+
+
+
+  { jmp_buf *PrevFrame, NewFrame; unsigned int MY_ID = (0); PrevFrame = CExceptionFrames[(0)].pFrame; CExceptionFrames[MY_ID].pFrame = (jmp_buf*)(&NewFrame); CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); if (_setjmp(NewFrame) == 0) { if (&PrevFrame){
+
+ incf(&code);
+
+  }
+
+  else { } CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); } else { exception = CExceptionFrames[MY_ID].Exception; exception=exception; } CExceptionFrames[MY_ID].pFrame = PrevFrame; } if (CExceptionFrames[(0)].Exception != (0x5A5A5A5A)){
+
+ UnityAssertEqualNumber((_U_SINT)((ERROR_OPERAND2)), (_U_SINT)((exception)), (((void *)0)), (_U_UINT)197, UNITY_DISPLAY_STYLE_INT);
+
+  }
+
+}
+
+
+
+void test_incf_operand1_has_valid_value_while_operand2_is_negative_1_should_throw_exception_error() {
+
+
+
+  ExceptionError exception;
+
+
+
+
+
+  Instruction inst = {
+
+                      .mnemonic = INCF,
+
+                      .name = "incf"
+
+                     };
+
+  Bytecode code = { .instruction = &inst,
+
+                    .operand1 = 0x23,
+
+     .operand2 = 0,
+
+     .operand3 = -1
+
+                  };
+
+
+
+
+
+
+
+  { jmp_buf *PrevFrame, NewFrame; unsigned int MY_ID = (0); PrevFrame = CExceptionFrames[(0)].pFrame; CExceptionFrames[MY_ID].pFrame = (jmp_buf*)(&NewFrame); CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); if (_setjmp(NewFrame) == 0) { if (&PrevFrame){
+
+ incf(&code);
+
+  }
+
+  else { } CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); } else { exception = CExceptionFrames[MY_ID].Exception; exception=exception; } CExceptionFrames[MY_ID].pFrame = PrevFrame; } if (CExceptionFrames[(0)].Exception != (0x5A5A5A5A)){
+
+ UnityAssertEqualNumber((_U_SINT)((ERROR_OPERAND3)), (_U_SINT)((exception)), (((void *)0)), (_U_UINT)222, UNITY_DISPLAY_STYLE_INT);
+
+  }
 
 }

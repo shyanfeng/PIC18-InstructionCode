@@ -37,7 +37,10 @@ extern void tearDown(void);
 extern void test_clrf_should_clear_fileReg(void);
 extern void test_clrf_should_clear_BSR(void);
 extern void test_clrf_should_throw_exception_error_BSR_more_than_15(void);
-extern void test_clrf_operand1_should_throw_exception_more_than_255_or_less_than_0(void);
+extern void test_clrf_operand1_should_throw_exception_error_more_than_255_or_less_than_0(void);
+extern void test_clrf_operand2_has_valid_value_while_operand3_is_negative_1_should_throw_exception_error(void);
+extern void test_clrf_operand2_and_operand3_is_negative_1_should_throw_exception_error(void);
+extern void test_clrf_operand2_and_operand3_has_valid_value_should_throw_exception_error(void);
 
 
 //=======Test Reset Option=====
@@ -56,7 +59,10 @@ int main(void)
   RUN_TEST(test_clrf_should_clear_fileReg, 9);
   RUN_TEST(test_clrf_should_clear_BSR, 29);
   RUN_TEST(test_clrf_should_throw_exception_error_BSR_more_than_15, 50);
-  RUN_TEST(test_clrf_operand1_should_throw_exception_more_than_255_or_less_than_0, 78);
+  RUN_TEST(test_clrf_operand1_should_throw_exception_error_more_than_255_or_less_than_0, 77);
+  RUN_TEST(test_clrf_operand2_has_valid_value_while_operand3_is_negative_1_should_throw_exception_error, 101);
+  RUN_TEST(test_clrf_operand2_and_operand3_is_negative_1_should_throw_exception_error, 125);
+  RUN_TEST(test_clrf_operand2_and_operand3_has_valid_value_should_throw_exception_error, 149);
 
   return (UnityEnd());
 }

@@ -146,5 +146,79 @@ void test_incf_operand1_should_throw_exception_error_more_than_255_or_less_than_
   Catch(exception){
 	TEST_ASSERT_EQUAL(ERROR_RANGE, exception);
   }
+}
 
+void test_incf_operand2_and_operand3_is_negative_1_should_throw_exception_error() {
+
+  ExceptionError exception;
+
+  // Create test fixture
+  Instruction inst = {
+                      .mnemonic = INCF,
+                      .name = "incf"
+                     };	
+  Bytecode code = { .instruction = &inst,
+                    .operand1 = 0x3f,
+					.operand2 = -1,
+					.operand3 = -1
+                  };
+	
+  // Test incf of the bytecode
+  
+  Try{
+	incf(&code);
+  }
+  Catch(exception){
+	TEST_ASSERT_EQUAL(ERROR_OPERAND2andOPERAND3, exception);
+  }
+}
+
+void test_incf_operand3_has_valid_value_while_operand2_is_negative_1_should_throw_exception_error() {
+
+  ExceptionError exception;
+
+  // Create test fixture
+  Instruction inst = {
+                      .mnemonic = INCF,
+                      .name = "incf"
+                     };	
+  Bytecode code = { .instruction = &inst,
+                    .operand1 = 0x23,
+					.operand2 = -1,
+					.operand3 = 1
+                  };
+	
+  // Test incf of the bytecode
+  
+  Try{
+	incf(&code);
+  }
+  Catch(exception){
+	TEST_ASSERT_EQUAL(ERROR_OPERAND2, exception);
+  }
+}
+
+void test_incf_operand1_has_valid_value_while_operand2_is_negative_1_should_throw_exception_error() {
+
+  ExceptionError exception;
+
+  // Create test fixture
+  Instruction inst = {
+                      .mnemonic = INCF,
+                      .name = "incf"
+                     };	
+  Bytecode code = { .instruction = &inst,
+                    .operand1 = 0x23,
+					.operand2 = 0,
+					.operand3 = -1
+                  };
+	
+  // Test incf of the bytecode
+  
+  Try{
+	incf(&code);
+  }
+  Catch(exception){
+	TEST_ASSERT_EQUAL(ERROR_OPERAND3, exception);
+  }
 }

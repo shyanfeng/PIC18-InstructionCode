@@ -4,6 +4,9 @@
 typedef enum	{
 					ERROR_RANGE,
 					ERROR_BSR,
+					ERROR_OPERAND2,
+					ERROR_OPERAND3,
+					ERROR_OPERAND2andOPERAND3
 				}ExceptionError;
 
 typedef enum 	{
