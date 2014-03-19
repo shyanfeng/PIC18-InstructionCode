@@ -1,0 +1,40 @@
+---
+:source:
+  :path: test
+  :file: test_movf.c
+:successes:
+- :test: test_movf_should_move_fileReg_to_WREG
+  :line: 9
+  :message: ''
+- :test: test_movf_should_move_fileReg_to_fileReg
+  :line: 29
+  :message: ''
+- :test: test_movf_should_move_fileReg_to_WREG_BSR
+  :line: 49
+  :message: ''
+- :test: test_movf_should_move_fileReg_to_fileReg_BSR
+  :line: 69
+  :message: ''
+- :test: test_movf_should_throw_exception_error_BSR_more_than_15
+  :line: 89
+  :message: ''
+- :test: test_movf_operand1_should_throw_exception_error_more_than_255_or_less_than_0
+  :line: 115
+  :message: ''
+- :test: test_movf_operand3_has_valid_value_while_operand2_is_negative_1_should_throw_exception_error
+  :line: 139
+  :message: ''
+- :test: test_movf_operand2_has_valid_value_while_operand3_is_negative_1_should_throw_exception_error
+  :line: 163
+  :message: ''
+- :test: test_movf_operand2_and_operand3_is_negative_1_should_throw_exception_error
+  :line: 187
+  :message: ''
+:failures: []
+:ignores: []
+:counts:
+  :total: 9
+  :passed: 9
+  :failed: 0
+  :ignored: 0
+:stdout: []

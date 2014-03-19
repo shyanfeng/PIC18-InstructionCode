@@ -18,7 +18,7 @@ void test_incf_should_increment_fileReg_and_store_in_fileReg() {
 					.operand3 = 0
                   };
 	
-  // Test incf of the bytecode
+  // Test INCF of the bytecode
   FSR[code.operand1] = 0x40;
   incf(&code);
 	
@@ -39,7 +39,7 @@ void test_incf_should_increment_fileReg_and_store_in_WREG() {
 					.operand3 = 0
                   };
 	
-  // Test incf of the bytecode
+  // Test INCF of the bytecode
   FSR[code.operand1] = 0xF2;
   incf(&code);
 	
@@ -61,7 +61,7 @@ void test_incf_should_increment_fileReg_and_select_BSR_and_store_in_fileReg() {
 					.operand3 = 1
                   };
 	
-  // Test incf of the bytecode
+  // Test INCF of the bytecode
   FSR[code.operand1] = 0x53;
   FSR[BSR] = 0x0C;
   FSR[code.operand1+(FSR[BSR]<<8)] = 22;
@@ -84,7 +84,7 @@ void test_incf_should_increment_fileReg_and_select_BSR_and_store_in_WREG() {
 					.operand3 = 1
                   };
 	
-  // Test incf of the bytecode
+  // Test INCF of the bytecode
   FSR[code.operand1] = 0x34;
   FSR[BSR] = 0x08;
   FSR[code.operand1+(FSR[BSR]<<8)] = 56;
@@ -111,7 +111,7 @@ void test_incf_should_throw_exception_error_BSR_more_than_15() {
 					.operand3 = 1
                   };
 	
-  // Test incf of the bytecode
+  // Test INCF of the bytecode
   FSR[BSR] = 0xff;
   
   Try{
@@ -138,7 +138,7 @@ void test_incf_operand1_should_throw_exception_error_more_than_255_or_less_than_
 					.operand3 = 1
                   };
 	
-  // Test incf of the bytecode
+  // Test INCF of the bytecode
   
   Try{
 	incf(&code);
@@ -163,7 +163,7 @@ void test_incf_operand2_and_operand3_is_negative_1_should_throw_exception_error(
 					.operand3 = -1
                   };
 	
-  // Test incf of the bytecode
+  // Test INCF of the bytecode
   
   Try{
 	incf(&code);
@@ -188,7 +188,7 @@ void test_incf_operand3_has_valid_value_while_operand2_is_negative_1_should_thro
 					.operand3 = 1
                   };
 	
-  // Test incf of the bytecode
+  // Test INCF of the bytecode
   
   Try{
 	incf(&code);
@@ -213,7 +213,7 @@ void test_incf_operand1_has_valid_value_while_operand2_is_negative_1_should_thro
 					.operand3 = -1
                   };
 	
-  // Test incf of the bytecode
+  // Test INCF of the bytecode
   
   Try{
 	incf(&code);
