@@ -9,6 +9,13 @@ typedef enum	{
 					ERROR_OPERAND2andOPERAND3
 				}ExceptionError;
 
+typedef enum	{
+					ACCESS = -5,
+					BANKED = -4,
+					F = -3,
+					W = -2
+				}SyntaxError;
+				
 typedef enum 	{
 					CLRF,
 					CPFSLT,
@@ -32,6 +39,7 @@ typedef struct {
 	int operand1;
 	int operand2;
 	int operand3;
+	int absoluteAddress;
 } Bytecode;
 
 
