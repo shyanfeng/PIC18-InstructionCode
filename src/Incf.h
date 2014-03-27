@@ -3,6 +3,7 @@
 
 #define WREG	0xf8b
 #define	BSR 	0xFE0
+#define STATUS	0xFD8
 
 extern unsigned char FSR[];
 

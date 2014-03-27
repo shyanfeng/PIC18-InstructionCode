@@ -3,32 +3,35 @@
   :path: test
   :file: test_clrf.c
 :successes:
-- :test: test_clrf_should_clear_fileReg
+- :test: test_clrf_should_throw_error_exception__if_operand1_over_range
   :line: 9
   :message: ''
-- :test: test_clrf_should_clear_BSR
-  :line: 29
+- :test: test_clrf_should_throw_error_exception__if_operand2_more_than_1_and_less_than_negative_5
+  :line: 35
+  :message: ''
+- :test: test_clrf_should_throw_error_exception__if_operand3_more_than_negative_5_and_1_and_is_negative_2_and_negative_3
+  :line: 61
+  :message: ''
+- :test: test_clrf_should_clear_fileReg_when_operand2_is_empty
+  :line: 87
+  :message: ''
+- :test: test_clrf_should_clear_BSR_when_operand2_is_empty
+  :line: 107
+  :message: ''
+- :test: test_clrf_should_clear_fileReg_when_operand3_is_empty
+  :line: 128
+  :message: ''
+- :test: test_clrf_should_clear_BSR_when_operand3_is_empty
+  :line: 148
   :message: ''
 - :test: test_clrf_should_throw_exception_error_BSR_more_than_15
-  :line: 50
-  :message: ''
-- :test: test_clrf_operand1_should_throw_exception_error_more_than_255_or_less_than_0
-  :line: 77
-  :message: ''
-- :test: test_clrf_operand2_has_valid_value_while_operand3_is_negative_1_should_throw_exception_error
-  :line: 101
-  :message: ''
-- :test: test_clrf_operand2_and_operand3_is_negative_1_should_throw_exception_error
-  :line: 125
-  :message: ''
-- :test: test_clrf_operand2_and_operand3_has_valid_value_should_throw_exception_error
-  :line: 149
+  :line: 169
   :message: ''
 :failures: []
 :ignores: []
 :counts:
-  :total: 7
-  :passed: 7
+  :total: 8
+  :passed: 8
   :failed: 0
   :ignored: 0
 :stdout: []

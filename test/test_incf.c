@@ -6,6 +6,84 @@
 void setUp() {}
 void tearDown() {}
 
+void test_incf_should_throw_error_exception__if_operand1_over_range(){
+  // Create test fixture
+  Instruction inst = {
+                      .mnemonic = INCF,
+                      .name = "incf"
+                     };	
+  Bytecode code = { .instruction = &inst,
+                    .operand1 = 0xfff,
+					.operand2 = 0,
+					.operand3 = ACCESS
+                  };
+  int exception;
+  
+  // Test INCF of the bytecode			  
+  FSR[code.operand1] = 0x53;
+  
+  // Unit test
+  Try{
+	incf(&code);
+  }
+  Catch(exception){
+	TEST_ASSERT_EQUAL(ERROR_RANGE, exception);
+  }
+  
+}
+
+void test_incf_should_throw_error_exception__if_operand2_more_than_1_and_less_than_negative_5(){
+  // Create test fixture
+  Instruction inst = {
+                      .mnemonic = INCF,
+                      .name = "incf"
+                     };	
+  Bytecode code = { .instruction = &inst,
+                    .operand1 = 0x40,
+					.operand2 = 5,
+					.operand3 = 0
+                  };
+  int exception;
+  
+  // Test INCF of the bytecode			  
+  FSR[code.operand1] = 0x53;
+  
+  // Unit test
+  Try{
+	incf(&code);
+  }
+  Catch(exception){
+	TEST_ASSERT_EQUAL(ERROR_OPERAND2, exception);
+  }
+  
+}
+
+void test_incf_should_throw_error_exception__if_operand3_more_than_negative_5_and_1_and_is_negative_2_and_negative_3(){
+  // Create test fixture
+  Instruction inst = {
+                      .mnemonic = INCF,
+                      .name = "incf"
+                     };	
+  Bytecode code = { .instruction = &inst,
+                    .operand1 = 0x40,
+					.operand2 = 0,
+					.operand3 = -3
+                  };
+  int exception;
+  
+  // Test INCF of the bytecode			  
+  FSR[code.operand1] = 0x23;
+  
+  // Unit test
+  Try{
+	incf(&code);
+  }
+  Catch(exception){
+	TEST_ASSERT_EQUAL(ERROR_OPERAND3, exception);
+  }
+  
+}
+
 void test_incf_should_increment_fileReg_and_store_in_fileReg() {
   // Create test fixture
   Instruction inst = {
@@ -13,9 +91,9 @@ void test_incf_should_increment_fileReg_and_store_in_fileReg() {
                       .name = "incf"
                      };	
   Bytecode code = { .instruction = &inst,
-                    .operand1 = 0xB4,
+                    .operand1 = 0x36,
 					.operand2 = 1,
-					.operand3 = 0
+					.operand3 = ACCESS
                   };
 	
   // Test INCF of the bytecode
@@ -34,9 +112,9 @@ void test_incf_should_increment_fileReg_and_store_in_WREG() {
                       .name = "incf"
                      };	
   Bytecode code = { .instruction = &inst,
-                    .operand1 = 0xB5,
-					.operand2 = 0,
-					.operand3 = 0
+                    .operand1 = 0x13,
+					.operand2 = W,
+					.operand3 = ACCESS
                   };
 	
   // Test INCF of the bytecode
@@ -57,19 +135,19 @@ void test_incf_should_increment_fileReg_and_select_BSR_and_store_in_fileReg() {
                      };	
   Bytecode code = { .instruction = &inst,
                     .operand1 = 0xB2,
-					.operand2 = 1,
-					.operand3 = 1
+					.operand2 = F,
+					.operand3 = BANKED
                   };
 	
   // Test INCF of the bytecode
   FSR[code.operand1] = 0x53;
   FSR[BSR] = 0x0C;
-  FSR[code.operand1+(FSR[BSR]<<8)] = 22;
+  FSR[code.operand1+(FSR[BSR]<<8)] = 0x23;
   incf(&code);
 
   
   // Unit test
-  TEST_ASSERT_EQUAL_HEX8(23, FSR[code.operand1+(FSR[BSR]<<8)]);
+  TEST_ASSERT_EQUAL_HEX8(0x24, FSR[code.operand1+(FSR[BSR]<<8)]);
 }
 
 void test_incf_should_increment_fileReg_and_select_BSR_and_store_in_WREG() {
@@ -81,19 +159,19 @@ void test_incf_should_increment_fileReg_and_select_BSR_and_store_in_WREG() {
   Bytecode code = { .instruction = &inst,
                     .operand1 = 0xB2,
 					.operand2 = 0,
-					.operand3 = 1
+					.operand3 = BANKED
                   };
 	
   // Test INCF of the bytecode
   FSR[code.operand1] = 0x34;
   FSR[BSR] = 0x08;
-  FSR[code.operand1+(FSR[BSR]<<8)] = 56;
+  FSR[code.operand1 + (FSR[BSR]<<8)] = 0x56;
   incf(&code);
 
   
   // Unit test
-  TEST_ASSERT_EQUAL_HEX8(56, FSR[code.operand1+(FSR[BSR]<<8)]);
-  TEST_ASSERT_EQUAL_HEX8(57, FSR[WREG]);
+  TEST_ASSERT_EQUAL_HEX8(0x56, FSR[code.operand1 + (FSR[BSR]<<8)]);
+  TEST_ASSERT_EQUAL_HEX8(0x57, FSR[WREG]);
 }
 
 void test_incf_should_throw_exception_error_BSR_more_than_15() {
@@ -123,102 +201,3 @@ void test_incf_should_throw_exception_error_BSR_more_than_15() {
 
 }
 
-void test_incf_operand1_should_throw_exception_error_more_than_255_or_less_than_0() {
-
-  ExceptionError exception;
-
-  // Create test fixture
-  Instruction inst = {
-                      .mnemonic = INCF,
-                      .name = "incf"
-                     };	
-  Bytecode code = { .instruction = &inst,
-                    .operand1 = 0xfff,
-					.operand2 = 0,
-					.operand3 = 1
-                  };
-	
-  // Test INCF of the bytecode
-  
-  Try{
-	incf(&code);
-  }
-  Catch(exception){
-	TEST_ASSERT_EQUAL(ERROR_RANGE, exception);
-  }
-}
-
-void test_incf_operand2_and_operand3_is_negative_1_should_throw_exception_error() {
-
-  ExceptionError exception;
-
-  // Create test fixture
-  Instruction inst = {
-                      .mnemonic = INCF,
-                      .name = "incf"
-                     };	
-  Bytecode code = { .instruction = &inst,
-                    .operand1 = 0x3f,
-					.operand2 = -1,
-					.operand3 = -1
-                  };
-	
-  // Test INCF of the bytecode
-  
-  Try{
-	incf(&code);
-  }
-  Catch(exception){
-	TEST_ASSERT_EQUAL(ERROR_OPERAND2andOPERAND3, exception);
-  }
-}
-
-void test_incf_operand3_has_valid_value_while_operand2_is_negative_1_should_throw_exception_error() {
-
-  ExceptionError exception;
-
-  // Create test fixture
-  Instruction inst = {
-                      .mnemonic = INCF,
-                      .name = "incf"
-                     };	
-  Bytecode code = { .instruction = &inst,
-                    .operand1 = 0x23,
-					.operand2 = -1,
-					.operand3 = 1
-                  };
-	
-  // Test INCF of the bytecode
-  
-  Try{
-	incf(&code);
-  }
-  Catch(exception){
-	TEST_ASSERT_EQUAL(ERROR_OPERAND2, exception);
-  }
-}
-
-void test_incf_operand1_has_valid_value_while_operand2_is_negative_1_should_throw_exception_error() {
-
-  ExceptionError exception;
-
-  // Create test fixture
-  Instruction inst = {
-                      .mnemonic = INCF,
-                      .name = "incf"
-                     };	
-  Bytecode code = { .instruction = &inst,
-                    .operand1 = 0x23,
-					.operand2 = 0,
-					.operand3 = -1
-                  };
-	
-  // Test INCF of the bytecode
-  
-  Try{
-	incf(&code);
-  }
-  Catch(exception){
-	TEST_ASSERT_EQUAL(ERROR_OPERAND3, exception);
-  }
-}
