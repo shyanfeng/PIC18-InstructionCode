@@ -34,15 +34,16 @@ char* GlobalOrderError;
 //=======External Functions This Runner Calls=====
 extern void setUp(void);
 extern void tearDown(void);
-extern void test_movf_should_move_fileReg_to_WREG(void);
-extern void test_movf_should_move_fileReg_to_fileReg(void);
-extern void test_movf_should_move_fileReg_to_WREG_BSR(void);
+extern void test_movf_should_throw_error_exception__if_operand1_over_range(void);
+extern void test_movf_should_throw_error_exception__if_operand2_more_than_7_and_less_than_0(void);
+extern void test_movf_should_throw_error_exception__if_operand3_more_than_negative_5_and_1_and_is_negative_2_and_negative_3(void);
+extern void test_movf_should_move_fileReg_to_WREG_when_operand1_less_than_0x80(void);
+extern void test_movf_should_move_fileReg_to_WREG_when_operand1_more_than_0x80(void);
+extern void test_movf_should_move_fileReg_to_fileReg_when_operand1_less_than_0x80(void);
+extern void test_movf_should_move_fileReg_to_fileReg_when_operand1_more_than_0x80(void);
+extern void test_movf_should_move_fileReg_to_WREG_BSR_when_operand1_more_than_0x80(void);
 extern void test_movf_should_move_fileReg_to_fileReg_BSR(void);
 extern void test_movf_should_throw_exception_error_BSR_more_than_15(void);
-extern void test_movf_operand1_should_throw_exception_error_more_than_255_or_less_than_0(void);
-extern void test_movf_operand3_has_valid_value_while_operand2_is_negative_1_should_throw_exception_error(void);
-extern void test_movf_operand2_has_valid_value_while_operand3_is_negative_1_should_throw_exception_error(void);
-extern void test_movf_operand2_and_operand3_is_negative_1_should_throw_exception_error(void);
 
 
 //=======Test Reset Option=====
@@ -58,15 +59,16 @@ int main(void)
 {
   Unity.TestFile = "test_movf.c";
   UnityBegin();
-  RUN_TEST(test_movf_should_move_fileReg_to_WREG, 9);
-  RUN_TEST(test_movf_should_move_fileReg_to_fileReg, 29);
-  RUN_TEST(test_movf_should_move_fileReg_to_WREG_BSR, 49);
-  RUN_TEST(test_movf_should_move_fileReg_to_fileReg_BSR, 69);
-  RUN_TEST(test_movf_should_throw_exception_error_BSR_more_than_15, 89);
-  RUN_TEST(test_movf_operand1_should_throw_exception_error_more_than_255_or_less_than_0, 115);
-  RUN_TEST(test_movf_operand3_has_valid_value_while_operand2_is_negative_1_should_throw_exception_error, 139);
-  RUN_TEST(test_movf_operand2_has_valid_value_while_operand3_is_negative_1_should_throw_exception_error, 163);
-  RUN_TEST(test_movf_operand2_and_operand3_is_negative_1_should_throw_exception_error, 187);
+  RUN_TEST(test_movf_should_throw_error_exception__if_operand1_over_range, 9);
+  RUN_TEST(test_movf_should_throw_error_exception__if_operand2_more_than_7_and_less_than_0, 34);
+  RUN_TEST(test_movf_should_throw_error_exception__if_operand3_more_than_negative_5_and_1_and_is_negative_2_and_negative_3, 60);
+  RUN_TEST(test_movf_should_move_fileReg_to_WREG_when_operand1_less_than_0x80, 86);
+  RUN_TEST(test_movf_should_move_fileReg_to_WREG_when_operand1_more_than_0x80, 106);
+  RUN_TEST(test_movf_should_move_fileReg_to_fileReg_when_operand1_less_than_0x80, 126);
+  RUN_TEST(test_movf_should_move_fileReg_to_fileReg_when_operand1_more_than_0x80, 146);
+  RUN_TEST(test_movf_should_move_fileReg_to_WREG_BSR_when_operand1_more_than_0x80, 166);
+  RUN_TEST(test_movf_should_move_fileReg_to_fileReg_BSR, 186);
+  RUN_TEST(test_movf_should_throw_exception_error_BSR_more_than_15, 206);
 
   return (UnityEnd());
 }

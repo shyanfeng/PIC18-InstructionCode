@@ -11,7 +11,7 @@ void incf(Bytecode *code){
 		if(code->operand2 >= -5 && code->operand2 <= 1){
 			if(code->operand3 >= -5 && code->operand3 <= 1){
 				if(code->operand3 == ACCESS || code->operand3 == -1 || code->operand3 == 0){
-					if(code->operand2 == 1 || code->operand2 == F ||code->operand3 == -3){
+					if(code->operand2 == 1 || code->operand2 == F ||code->operand3 == -1){
 						if(code->operand1 < 0x80){
 							FSR[code->operand1] = FSR[code->operand1] + 1;
 							if(FSR[code->operand1] <= -1){
@@ -55,7 +55,7 @@ void incf(Bytecode *code){
 					}
 				}else if(code->operand3 == BANKED || code->operand3 == -4 || code->operand3 == 1){
 					if(FSR[BSR] <= 15){
-						if(code->operand2 == 1 || code->operand2 == F ||code->operand3 == -3){
+						if(code->operand2 == 1 || code->operand2 == F ||code->operand3 == -1){
 							FSR[code->operand1 + (FSR[BSR]<<8)] = FSR[code->operand1 + (FSR[BSR]<<8)] + 1;
 								if(FSR[code->operand1 + (FSR[BSR]<<8)] <= -1){
 									FSR[STATUS] == FSR[STATUS] | 0b00010000;
