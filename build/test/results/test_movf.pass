@@ -6,28 +6,28 @@
 - :test: test_movf_should_throw_error_exception__if_operand1_over_range
   :line: 9
   :message: ''
-- :test: test_movf_should_throw_error_exception__if_operand2_more_than_7_and_less_than_0
+- :test: test_movf_should_throw_error_exception_if_operand2_more_than_1_and_less_than_negative_5
   :line: 34
   :message: ''
 - :test: test_movf_should_throw_error_exception__if_operand3_more_than_negative_5_and_1_and_is_negative_2_and_negative_3
   :line: 60
   :message: ''
-- :test: test_movf_should_move_fileReg_to_WREG_when_operand1_less_than_0x80
+- :test: test_movf_should_move_fileReg_to_WREG_when_operand1_less_than_0x80_and_operand2_is_0_and_operand3_is_0
   :line: 86
   :message: ''
-- :test: test_movf_should_move_fileReg_to_WREG_when_operand1_more_than_0x80
+- :test: test_movf_should_move_fileReg_to_WREG_when_operand1_more_than_0x80_and_operand2_is_0_and_operand3_is_0
   :line: 106
   :message: ''
-- :test: test_movf_should_move_fileReg_to_fileReg_when_operand1_less_than_0x80
+- :test: test_movf_should_move_fileReg_to_fileReg_when_operand1_less_than_0x80_and_operand2_is_F_and_operand3_is_ACCESS
   :line: 126
   :message: ''
-- :test: test_movf_should_move_fileReg_to_fileReg_when_operand1_more_than_0x80
+- :test: test_movf_should_move_fileReg_to_fileReg_when_operand1_more_than_0x80_and_operand2_is_F_and_operand3_is_ACCESS
   :line: 146
   :message: ''
-- :test: test_movf_should_move_fileReg_to_WREG_BSR_when_operand1_more_than_0x80
+- :test: test_movf_should_move_fileReg_to_WREG_BSR_when_operand2_is_0_and_operand3_is_1
   :line: 166
   :message: ''
-- :test: test_movf_should_move_fileReg_to_fileReg_BSR
+- :test: test_movf_should_move_fileReg_to_fileReg_BSR_when_operand2_is_F_and_operand3_is_BANKED
   :line: 186
   :message: ''
 - :test: test_movf_should_throw_exception_error_BSR_more_than_15

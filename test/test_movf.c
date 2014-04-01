@@ -31,7 +31,7 @@ void test_movf_should_throw_error_exception__if_operand1_over_range(){
   }
 }
 
-void test_movf_should_throw_error_exception__if_operand2_more_than_7_and_less_than_0(){
+void test_movf_should_throw_error_exception_if_operand2_more_than_1_and_less_than_negative_5(){
   // Create test fixture
   Instruction inst = {
                       .mnemonic = MOVF,
@@ -83,7 +83,7 @@ void test_movf_should_throw_error_exception__if_operand3_more_than_negative_5_an
   
 }
 
-void test_movf_should_move_fileReg_to_WREG_when_operand1_less_than_0x80() {
+void test_movf_should_move_fileReg_to_WREG_when_operand1_less_than_0x80_and_operand2_is_0_and_operand3_is_0() {
   // Create test fixture
   Instruction inst = {
                       .mnemonic = MOVF,
@@ -103,7 +103,7 @@ void test_movf_should_move_fileReg_to_WREG_when_operand1_less_than_0x80() {
   TEST_ASSERT_EQUAL_HEX8(0x22, FSR[WREG]);
 }
 
-void test_movf_should_move_fileReg_to_WREG_when_operand1_more_than_0x80() {
+void test_movf_should_move_fileReg_to_WREG_when_operand1_more_than_0x80_and_operand2_is_0_and_operand3_is_0() {
   // Create test fixture
   Instruction inst = {
                       .mnemonic = MOVF,
@@ -123,7 +123,7 @@ void test_movf_should_move_fileReg_to_WREG_when_operand1_more_than_0x80() {
   TEST_ASSERT_EQUAL_HEX8(0xA2, FSR[WREG + (0x0F00)]);
 }
 
-void test_movf_should_move_fileReg_to_fileReg_when_operand1_less_than_0x80() {
+void test_movf_should_move_fileReg_to_fileReg_when_operand1_less_than_0x80_and_operand2_is_F_and_operand3_is_ACCESS() {
   // Create test fixture
   Instruction inst = {
                       .mnemonic = MOVF,
@@ -143,7 +143,7 @@ void test_movf_should_move_fileReg_to_fileReg_when_operand1_less_than_0x80() {
   TEST_ASSERT_EQUAL_HEX8(0x56, FSR[code.operand1]);
 }
 
-void test_movf_should_move_fileReg_to_fileReg_when_operand1_more_than_0x80() {
+void test_movf_should_move_fileReg_to_fileReg_when_operand1_more_than_0x80_and_operand2_is_F_and_operand3_is_ACCESS() {
   // Create test fixture
   Instruction inst = {
                       .mnemonic = MOVF,
@@ -163,7 +163,7 @@ void test_movf_should_move_fileReg_to_fileReg_when_operand1_more_than_0x80() {
   TEST_ASSERT_EQUAL_HEX8(0x56, FSR[code.operand1 + (0x0F00)]);
 }
 
-void test_movf_should_move_fileReg_to_WREG_BSR_when_operand1_more_than_0x80() {
+void test_movf_should_move_fileReg_to_WREG_BSR_when_operand2_is_0_and_operand3_is_1() {
   // Create test fixture
   Instruction inst = {
                       .mnemonic = MOVF,
@@ -183,7 +183,7 @@ void test_movf_should_move_fileReg_to_WREG_BSR_when_operand1_more_than_0x80() {
   TEST_ASSERT_EQUAL_HEX8(0x1C, FSR[WREG]);
 }
 
-void test_movf_should_move_fileReg_to_fileReg_BSR() {
+void test_movf_should_move_fileReg_to_fileReg_BSR_when_operand2_is_F_and_operand3_is_BANKED() {
   // Create test fixture
   Instruction inst = {
                       .mnemonic = MOVF,

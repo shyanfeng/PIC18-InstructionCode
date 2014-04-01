@@ -14,42 +14,50 @@ void clrf(Bytecode *code){
 					if(code->operand2 == ACCESS || code->operand2 == -1 || code->operand2 == 0){
 						if(code->operand1 < 0x80){
 							FSR[code->operand1] = 0;
-							if(FSR[code->operand1] == 0){
+							if(FSR[code->operand1] == 0){							//Status Affect: Z
 								FSR[STATUS] == FSR[STATUS] | 0b0000100;
 							}
 						}
 						else{
 							FSR[code->operand1 + (0x0F00)] = 0;
-							if(FSR[code->operand1 + (0x0F00)] == 0){
+							if(FSR[code->operand1 + (0x0F00)] == 0){				//Status Affect: Z
 								FSR[STATUS] == FSR[STATUS] | 0b0000100;
 							}
 						}
 					}else{
-						FSR[code->operand1 + (FSR[BSR]<<8)] = 0;
-						if(FSR[code->operand1 + (FSR[BSR]<<8)] == 0){
-								FSR[STATUS] == FSR[STATUS] | 0b0000100;
+						if(FSR[BSR] >= 0 && FSR[BSR] <= 15){
+							FSR[code->operand1 + (FSR[BSR]<<8)] = 0;
+							if(FSR[code->operand1 + (FSR[BSR]<<8)] == 0){			//Status Affect: Z
+									FSR[STATUS] == FSR[STATUS] | 0b0000100;
+							}
 						}
+						else
+							Throw(ERROR_BSR);
 					}
 				}
 				if(code->operand2 = -1){
 					if(code->operand3 == ACCESS || code->operand3 == -1 || code->operand3 == 0){
 						if(code->operand1 < 0x80){
 							FSR[code->operand1] = 0;
-							if(FSR[code->operand1] == 0){
+							if(FSR[code->operand1] == 0){							//Status Affect: Z
 								FSR[STATUS] == FSR[STATUS] | 0b0000100;
 							}
 						}
 						else{
 							FSR[code->operand1 + (0x0F00)] = 0;
-							if(FSR[code->operand1 + (0x0F00)] == 0){
+							if(FSR[code->operand1 + (0x0F00)] == 0){				//Status Affect: Z
 								FSR[STATUS] == FSR[STATUS] | 0b0000100;
 							}
 						}
 					}else{
-						FSR[code->operand1 + (FSR[BSR]<<8)] = 0;
-						if(FSR[code->operand1 + (FSR[BSR]<<8)] == 0){
-								FSR[STATUS] == FSR[STATUS] | 0b0000100;
+						if(FSR[BSR] >= 0 && FSR[BSR] <= 15){
+							FSR[code->operand1 + (FSR[BSR]<<8)] = 0;
+							if(FSR[code->operand1 + (FSR[BSR]<<8)] == 0){			//Status Affect: Z
+									FSR[STATUS] == FSR[STATUS] | 0b0000100;
+							}
 						}
+						else
+							Throw(ERROR_BSR);
 					}
 				}
 			}

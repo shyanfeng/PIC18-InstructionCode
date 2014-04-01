@@ -60,7 +60,7 @@ void test_movf_should_throw_error_exception__if_operand1_over_range(){
 
 
 
-void test_movf_should_throw_error_exception__if_operand2_more_than_7_and_less_than_0(){
+void test_movf_should_throw_error_exception_if_operand2_more_than_1_and_less_than_negative_5(){
 
 
 
@@ -164,7 +164,7 @@ void test_movf_should_throw_error_exception__if_operand3_more_than_negative_5_an
 
 
 
-void test_movf_should_move_fileReg_to_WREG_when_operand1_less_than_0x80() {
+void test_movf_should_move_fileReg_to_WREG_when_operand1_less_than_0x80_and_operand2_is_0_and_operand3_is_0() {
 
 
 
@@ -204,7 +204,7 @@ void test_movf_should_move_fileReg_to_WREG_when_operand1_less_than_0x80() {
 
 
 
-void test_movf_should_move_fileReg_to_WREG_when_operand1_more_than_0x80() {
+void test_movf_should_move_fileReg_to_WREG_when_operand1_more_than_0x80_and_operand2_is_0_and_operand3_is_0() {
 
 
 
@@ -244,7 +244,7 @@ void test_movf_should_move_fileReg_to_WREG_when_operand1_more_than_0x80() {
 
 
 
-void test_movf_should_move_fileReg_to_fileReg_when_operand1_less_than_0x80() {
+void test_movf_should_move_fileReg_to_fileReg_when_operand1_less_than_0x80_and_operand2_is_F_and_operand3_is_ACCESS() {
 
 
 
@@ -284,7 +284,7 @@ void test_movf_should_move_fileReg_to_fileReg_when_operand1_less_than_0x80() {
 
 
 
-void test_movf_should_move_fileReg_to_fileReg_when_operand1_more_than_0x80() {
+void test_movf_should_move_fileReg_to_fileReg_when_operand1_more_than_0x80_and_operand2_is_F_and_operand3_is_ACCESS() {
 
 
 
@@ -324,7 +324,7 @@ void test_movf_should_move_fileReg_to_fileReg_when_operand1_more_than_0x80() {
 
 
 
-void test_movf_should_move_fileReg_to_WREG_BSR_when_operand1_more_than_0x80() {
+void test_movf_should_move_fileReg_to_WREG_BSR_when_operand2_is_0_and_operand3_is_1() {
 
 
 
@@ -364,7 +364,7 @@ void test_movf_should_move_fileReg_to_WREG_BSR_when_operand1_more_than_0x80() {
 
 
 
-void test_movf_should_move_fileReg_to_fileReg_BSR() {
+void test_movf_should_move_fileReg_to_fileReg_BSR_when_operand2_is_F_and_operand3_is_BANKED() {
 
 
 

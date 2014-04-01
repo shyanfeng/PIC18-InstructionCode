@@ -84,7 +84,7 @@ void test_incf_should_throw_error_exception__if_operand3_more_than_negative_5_an
   
 }
 
-void test_incf_should_increment_fileReg_and_store_in_fileReg() {
+void test_incf_should_increment_fileReg_and_store_in_fileReg_when_operand1_less_than_0x80_and_operand2_is_1_and_operand3_is_ACCESS() {
   // Create test fixture
   Instruction inst = {
                       .mnemonic = INCF,
@@ -105,7 +105,28 @@ void test_incf_should_increment_fileReg_and_store_in_fileReg() {
   TEST_ASSERT_EQUAL_HEX8(0x41, FSR[code.operand1]);
 }
 
-void test_incf_should_increment_fileReg_and_store_in_WREG() {
+void test_incf_should_increment_fileReg_and_store_in_fileReg_when_operand1_more_than_0x80_and_operand2_is_1_and_operand3_is_ACCESS() {
+  // Create test fixture
+  Instruction inst = {
+                      .mnemonic = INCF,
+                      .name = "incf"
+                     };	
+  Bytecode code = { .instruction = &inst,
+                    .operand1 = 0xB2,
+					.operand2 = 1,
+					.operand3 = ACCESS
+                  };
+	
+  // Test INCF of the bytecode
+  FSR[code.operand1 + (0x0F00)] = 0x40;
+  incf(&code);
+	
+	
+  // Unit test
+  TEST_ASSERT_EQUAL_HEX8(0x41, FSR[code.operand1 + (0x0F00)]);
+}
+
+void test_incf_should_increment_fileReg_and_store_in_WREG_when_operand1_less_than_0x80_and_operand2_is_W_and_operand3_is_ACCESS() {
   // Create test fixture
   Instruction inst = {
                       .mnemonic = INCF,
@@ -127,7 +148,29 @@ void test_incf_should_increment_fileReg_and_store_in_WREG() {
   TEST_ASSERT_EQUAL_HEX8(0xF3, FSR[WREG]);
 }
 
-void test_incf_should_increment_fileReg_and_select_BSR_and_store_in_fileReg() {
+void test_incf_should_increment_fileReg_and_store_in_WREG_when_operand1_more_than_0x80_and_operand2_is_W_and_operand3_is_ACCESS() {
+  // Create test fixture
+  Instruction inst = {
+                      .mnemonic = INCF,
+                      .name = "incf"
+                     };	
+  Bytecode code = { .instruction = &inst,
+                    .operand1 = 0x13,
+					.operand2 = W,
+					.operand3 = ACCESS
+                  };
+	
+  // Test INCF of the bytecode
+  FSR[code.operand1] = 0x34;
+  incf(&code);
+	
+	
+  // Unit test
+  TEST_ASSERT_EQUAL_HEX8(0x34, FSR[code.operand1]);
+  TEST_ASSERT_EQUAL_HEX8(0x35, FSR[WREG]);
+}
+
+void test_incf_should_increment_fileReg_and_store_in_fileReg_when_BSR_more_than_0_and_less_than_15_and_operand2_is_F_and_operand3_is_BANKED() {
   // Create test fixture
   Instruction inst = {
                       .mnemonic = INCF,
@@ -140,7 +183,6 @@ void test_incf_should_increment_fileReg_and_select_BSR_and_store_in_fileReg() {
                   };
 	
   // Test INCF of the bytecode
-  FSR[code.operand1] = 0x53;
   FSR[BSR] = 0x0C;
   FSR[code.operand1+(FSR[BSR]<<8)] = 0x23;
   incf(&code);
@@ -150,7 +192,7 @@ void test_incf_should_increment_fileReg_and_select_BSR_and_store_in_fileReg() {
   TEST_ASSERT_EQUAL_HEX8(0x24, FSR[code.operand1+(FSR[BSR]<<8)]);
 }
 
-void test_incf_should_increment_fileReg_and_select_BSR_and_store_in_WREG() {
+void test_incf_should_increment_fileReg_and_store_in_WREG_when_BSR_more_than_0_and_less_than_15_and_operand2_is_W_and_operand3_is_BANKED() {
   // Create test fixture
   Instruction inst = {
                       .mnemonic = INCF,
@@ -158,12 +200,11 @@ void test_incf_should_increment_fileReg_and_select_BSR_and_store_in_WREG() {
                      };	
   Bytecode code = { .instruction = &inst,
                     .operand1 = 0xB2,
-					.operand2 = 0,
+					.operand2 = W,
 					.operand3 = BANKED
                   };
 	
   // Test INCF of the bytecode
-  FSR[code.operand1] = 0x34;
   FSR[BSR] = 0x08;
   FSR[code.operand1 + (FSR[BSR]<<8)] = 0x56;
   incf(&code);

@@ -114,7 +114,9 @@ void test_clrf_should_throw_error_exception__if_operand2_more_than_1_and_less_th
 
 
 
-void test_clrf_should_throw_error_exception__if_operand3_more_than_negative_5_and_1_and_is_negative_2_and_negative_3(){
+void test_clrf_should_clear_fileReg_when_if_operand3_more_than_negative_5_and_1_and_is_negative_2_and_negative_3(){
+
+  ExceptionError exception;
 
 
 
@@ -130,13 +132,11 @@ void test_clrf_should_throw_error_exception__if_operand3_more_than_negative_5_an
 
                     .operand1 = 0x40,
 
-     .operand2 = 0,
+     .operand2 = 1,
 
-     .operand3 = -3
+     .operand3 = -7
 
                   };
-
-  int exception;
 
 
 
@@ -166,7 +166,9 @@ void test_clrf_should_throw_error_exception__if_operand3_more_than_negative_5_an
 
 
 
-void test_clrf_should_clear_fileReg_when_operand2_is_empty() {
+void test_clrf_should_clear_fileReg_when_operand1_is_less_than_0x80_operand2_is_empty_and_operand3_is_0() {
+
+  ExceptionError exception;
 
 
 
@@ -200,13 +202,57 @@ void test_clrf_should_clear_fileReg_when_operand2_is_empty() {
 
 
 
-  UnityAssertEqualNumber((_U_SINT)(_US8 )((0x00)), (_U_SINT)(_US8 )((FSR[code.operand1])), (((void *)0)), (_U_UINT)104, UNITY_DISPLAY_STYLE_HEX8);
+  UnityAssertEqualNumber((_U_SINT)(_US8 )((0x00)), (_U_SINT)(_US8 )((FSR[code.operand1])), (((void *)0)), (_U_UINT)105, UNITY_DISPLAY_STYLE_HEX8);
 
 }
 
 
 
-void test_clrf_should_clear_BSR_when_operand2_is_empty() {
+void test_clrf_should_clear_fileReg_when_operand1_is_more_than_0x80_operand2_is_empty_and_operand3_is_ACCESS() {
+
+  ExceptionError exception;
+
+
+
+  Instruction inst = {
+
+                      .mnemonic = CLRF,
+
+                      .name = "clrf"
+
+                     };
+
+  Bytecode code = { .instruction = &inst,
+
+                    .operand1 = 0x9D,
+
+     .operand2 = -1,
+
+     .operand3 = ACCESS
+
+                  };
+
+
+
+
+
+  FSR[code.operand1 + (0x0F00)] = 0x4E;
+
+  clrf(&code);
+
+
+
+
+
+  UnityAssertEqualNumber((_U_SINT)(_US8 )((0x00)), (_U_SINT)(_US8 )((FSR[code.operand1])), (((void *)0)), (_U_UINT)126, UNITY_DISPLAY_STYLE_HEX8);
+
+}
+
+
+
+void test_clrf_should_clear_BSR_is_more_than_0_and_less_than_15_when_operand2_is_empty_and_operand3_is_1() {
+
+  ExceptionError exception;
 
 
 
@@ -232,9 +278,7 @@ void test_clrf_should_clear_BSR_when_operand2_is_empty() {
 
 
 
-  FSR[code.operand1] = 0x8F;
-
-  FSR[0xFE0] = 0x0F;
+  FSR[code.operand1 + (FSR[0xFE0]<<8)] = 0x8F;
 
   clrf(&code);
 
@@ -242,13 +286,13 @@ void test_clrf_should_clear_BSR_when_operand2_is_empty() {
 
 
 
-  UnityAssertEqualNumber((_U_SINT)(_US8 )((0x00)), (_U_SINT)(_US8 )((FSR[code.operand1+(FSR[0xFE0]<<8)])), (((void *)0)), (_U_UINT)125, UNITY_DISPLAY_STYLE_HEX8);
+  UnityAssertEqualNumber((_U_SINT)(_US8 )((0x00)), (_U_SINT)(_US8 )((FSR[code.operand1 + (FSR[0xFE0]<<8)])), (((void *)0)), (_U_UINT)147, UNITY_DISPLAY_STYLE_HEX8);
 
 }
 
 
 
-void test_clrf_should_clear_fileReg_when_operand3_is_empty() {
+void test_clrf_should_clear_fileReg_when_operand1_is_less_than_0x80_and_operand2_is_0_and_operand3_is_empty() {
 
 
 
@@ -282,13 +326,13 @@ void test_clrf_should_clear_fileReg_when_operand3_is_empty() {
 
 
 
-  UnityAssertEqualNumber((_U_SINT)(_US8 )((0x00)), (_U_SINT)(_US8 )((FSR[code.operand1])), (((void *)0)), (_U_UINT)145, UNITY_DISPLAY_STYLE_HEX8);
+  UnityAssertEqualNumber((_U_SINT)(_US8 )((0x00)), (_U_SINT)(_US8 )((FSR[code.operand1])), (((void *)0)), (_U_UINT)167, UNITY_DISPLAY_STYLE_HEX8);
 
 }
 
 
 
-void test_clrf_should_clear_BSR_when_operand3_is_empty() {
+void test_clrf_should_clear_fileReg_when_operand1_is_more_than_0x80_and_operand2_is_ACCESS_and_operand3_is_empty() {
 
 
 
@@ -302,7 +346,47 @@ void test_clrf_should_clear_BSR_when_operand3_is_empty() {
 
   Bytecode code = { .instruction = &inst,
 
-                    .operand1 = 0x41,
+                    .operand1 = 0xEF,
+
+     .operand2 = ACCESS,
+
+     .operand3 = -1
+
+                  };
+
+
+
+
+
+  FSR[code.operand1 + (0x0F00)] = 0x45;
+
+  clrf(&code);
+
+
+
+
+
+  UnityAssertEqualNumber((_U_SINT)(_US8 )((0x00)), (_U_SINT)(_US8 )((FSR[code.operand1 + (0x0F00)])), (((void *)0)), (_U_UINT)187, UNITY_DISPLAY_STYLE_HEX8);
+
+}
+
+
+
+void test_clrf_should_clear_BSR_is_more_than_0_and_less_than_15_when_operand2_is_BANKED_and_operand3_is_empty() {
+
+
+
+  Instruction inst = {
+
+                      .mnemonic = CLRF,
+
+                      .name = "clrf"
+
+                     };
+
+  Bytecode code = { .instruction = &inst,
+
+                    .operand1 = 0xA2,
 
      .operand2 = BANKED,
 
@@ -314,7 +398,7 @@ void test_clrf_should_clear_BSR_when_operand3_is_empty() {
 
 
 
-  FSR[code.operand1] = 0x8F;
+  FSR[code.operand1 +(FSR[0xFE0]<<8)] = 0x8F;
 
   FSR[0xFE0] = 0x0F;
 
@@ -324,7 +408,7 @@ void test_clrf_should_clear_BSR_when_operand3_is_empty() {
 
 
 
-  UnityAssertEqualNumber((_U_SINT)(_US8 )((0x00)), (_U_SINT)(_US8 )((FSR[code.operand1+(FSR[0xFE0]<<8)])), (((void *)0)), (_U_UINT)166, UNITY_DISPLAY_STYLE_HEX8);
+  UnityAssertEqualNumber((_U_SINT)(_US8 )((0x00)), (_U_SINT)(_US8 )((FSR[code.operand1 + (FSR[0xFE0]<<8)])), (((void *)0)), (_U_UINT)208, UNITY_DISPLAY_STYLE_HEX8);
 
 }
 
@@ -352,9 +436,9 @@ void test_clrf_should_throw_exception_error_BSR_more_than_15() {
 
                     .operand1 = 0x54,
 
-     .operand2 = -1,
+     .operand2 = 1,
 
-     .operand3 = 1
+     .operand3 = 0
 
                   };
 
@@ -374,7 +458,7 @@ void test_clrf_should_throw_exception_error_BSR_more_than_15() {
 
   else { } CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); } else { exception = CExceptionFrames[MY_ID].Exception; exception=exception; } CExceptionFrames[MY_ID].pFrame = PrevFrame; } if (CExceptionFrames[(0)].Exception != (0x5A5A5A5A)){
 
- UnityAssertEqualNumber((_U_SINT)((ERROR_BSR)), (_U_SINT)((exception)), (((void *)0)), (_U_UINT)191, UNITY_DISPLAY_STYLE_INT);
+ UnityAssertEqualNumber((_U_SINT)((ERROR_BSR)), (_U_SINT)((exception)), (((void *)0)), (_U_UINT)233, UNITY_DISPLAY_STYLE_INT);
 
   }
 

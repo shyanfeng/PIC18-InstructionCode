@@ -12,26 +12,32 @@
 - :test: test_incf_should_throw_error_exception__if_operand3_more_than_negative_5_and_1_and_is_negative_2_and_negative_3
   :line: 61
   :message: ''
-- :test: test_incf_should_increment_fileReg_and_store_in_fileReg
+- :test: test_incf_should_increment_fileReg_and_store_in_fileReg_when_operand1_less_than_0x80_and_operand2_is_1_and_operand3_is_ACCESS
   :line: 87
   :message: ''
-- :test: test_incf_should_increment_fileReg_and_store_in_WREG
+- :test: test_incf_should_increment_fileReg_and_store_in_fileReg_when_operand1_more_than_0x80_and_operand2_is_1_and_operand3_is_ACCESS
   :line: 108
   :message: ''
-- :test: test_incf_should_increment_fileReg_and_select_BSR_and_store_in_fileReg
-  :line: 130
+- :test: test_incf_should_increment_fileReg_and_store_in_WREG_when_operand1_less_than_0x80_and_operand2_is_W_and_operand3_is_ACCESS
+  :line: 129
   :message: ''
-- :test: test_incf_should_increment_fileReg_and_select_BSR_and_store_in_WREG
-  :line: 153
+- :test: test_incf_should_increment_fileReg_and_store_in_WREG_when_operand1_more_than_0x80_and_operand2_is_W_and_operand3_is_ACCESS
+  :line: 151
+  :message: ''
+- :test: test_incf_should_increment_fileReg_and_store_in_fileReg_when_BSR_more_than_0_and_less_than_15_and_operand2_is_F_and_operand3_is_BANKED
+  :line: 173
+  :message: ''
+- :test: test_incf_should_increment_fileReg_and_store_in_WREG_when_BSR_more_than_0_and_less_than_15_and_operand2_is_W_and_operand3_is_BANKED
+  :line: 195
   :message: ''
 - :test: test_incf_should_throw_exception_error_BSR_more_than_15
-  :line: 177
+  :line: 218
   :message: ''
 :failures: []
 :ignores: []
 :counts:
-  :total: 8
-  :passed: 8
+  :total: 10
+  :passed: 10
   :failed: 0
   :ignored: 0
 :stdout: []
