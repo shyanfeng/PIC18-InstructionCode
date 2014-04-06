@@ -8,8 +8,8 @@
  * Copyright: GPLv3
  */
 
-#ifndef	__MOVF_H__
-#define	__MOVF_H__
+#ifndef	__SUBWFB_H__
+#define	__SUBWFB_H__
 
 #define WREG	0xf8b
 #define	BSR 	0xFE0
@@ -17,6 +17,6 @@
 
 extern unsigned char FSR[];
 
-int movf(Bytecode *code);
+int subwfb(Bytecode *code);
 
-#endif	// __MOVF_H__
+#endif	// __SUBWFB_H__

@@ -1,3 +1,13 @@
+/**
+ * Author: Lee Shyan Feng
+ * Email: shyanfeng@gmail.com
+ * Date: 2/3/2014
+ * Project name: PIC18 simulator
+ * Programme: Microeletronic with Embedded Technology
+ * Institution: Tunku Abdul Rahman University College
+ * Copyright: GPLv3
+ */
+
 #ifndef	__INCF_H__
 #define	__INCF_H__
 
@@ -7,6 +17,6 @@
 
 extern unsigned char FSR[];
 
-void incf(Bytecode *code);
+int incf(Bytecode *code);
 
 #endif	// __INCF_H__

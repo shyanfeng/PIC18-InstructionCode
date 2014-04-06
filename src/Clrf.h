@@ -1,3 +1,13 @@
+/**
+ * Author: Lee Shyan Feng
+ * Email: shyanfeng@gmail.com
+ * Date: 2/3/2014
+ * Project name: PIC18 simulator
+ * Programme: Microeletronic with Embedded Technology
+ * Institution: Tunku Abdul Rahman University College
+ * Copyright: GPLv3
+ */
+
 #ifndef	__CLRF_H__
 #define	__CLRF_H__
 
@@ -7,6 +17,6 @@
 
 extern unsigned char FSR[];
 
-void clrf(Bytecode *code);
+int clrf(Bytecode *code);
 
 #endif	// __CLRF_H__

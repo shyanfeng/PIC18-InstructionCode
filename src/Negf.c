@@ -1,3 +1,13 @@
+/**
+ * Author: Lee Shyan Feng
+ * Email: shyanfeng@gmail.com
+ * Date: 2/3/2014
+ * Project name: PIC18 simulator
+ * Programme: Microeletronic with Embedded Technology
+ * Institution: Tunku Abdul Rahman University College
+ * Copyright: GPLv3
+ */
+
 #include <stdio.h>
 #include "Bytecode.h"
 #include "Negf.h"
@@ -5,108 +15,85 @@
 
 char unsigned FSR[0x1000];
 
-void negf(Bytecode *code){
-	if(code->operand1 >= 0 && code->operand1 <= 255){
+/**
+  *
+  *	Name		: NEGF
+  *	Input		: f{,a}
+  *	Operation	: ~(F) + 1 -> f
+  *	Destroy		: N, OV, C, DC, Z
+  *
+ */ 
+
+int negf(Bytecode *code){
+	int temp1;
+	
+	if(code->operand1 >= 0x00 && code->operand1 <= 0xfff){
 		if(code->operand2 >= -5 && code->operand2 <= 1){
-			if(code->operand3 >= -5 && code->operand3 <= 1){
-				if(code->operand3 == -1){
-					if(code->operand2 == ACCESS || code->operand2 == -1 || code->operand2 == 0){
-						if(code->operand1 < 0x80){
-							printf("aaa");
-							FSR[code->operand1] = ~(FSR[code->operand1]) + 1;
-							if(FSR[code->operand1] <= -1){								//Status Affect: N
-								FSR[STATUS] == FSR[STATUS] | 0b00010000;
-							}else if(FSR[code->operand1] >= 0x81){						//Status Affect: OV
-								FSR[STATUS] == FSR[STATUS] | 0b00001000;
-							}else if(FSR[code->operand1] == 0){							//Status Affect: Z
-								FSR[STATUS] == FSR[STATUS] | 0b00000100;
-							}else if(FSR[code->operand1] == 0x0F){						//Status Affect: DC
-								FSR[STATUS] == FSR[STATUS] | 0b00000010;
-							}else if(FSR[code->operand1] == 0xFF){						//Status Affect: C
-								FSR[STATUS] == FSR[STATUS] | 0b00000001;
-							}
+			if(code->operand3 == -1){
+				if(code->operand2 == ACCESS || code->operand2 == -1 || code->operand2 == 0){
+					if(code->operand1 < 0x80){
+						temp1 = ~(FSR[code->operand1]) + 1;
+						FSR[code->operand1] = temp1;
+						if(FSR[code->operand1] <= -1){							//Status Affect: N
+							FSR[STATUS] = FSR[STATUS] | 0b00010000;
 						}
-						else{
-							FSR[code->operand1 + (0x0F00)] = ~(FSR[code->operand1 + (0x0F00)]) + 1;
-							if(FSR[code->operand1 + (0x0F00)] <= -1){					//Status Affect: N
-								FSR[STATUS] == FSR[STATUS] | 0b00010000;	
-							}else if(FSR[code->operand1 + (0x0F00)] >= 0x81){			//Status Affect: OV
-								FSR[STATUS] == FSR[STATUS] | 0b00001000;
-							}else if(FSR[code->operand1 + (0x0F00)] == 0){				//Status Affect: Z
-								FSR[STATUS] == FSR[STATUS] | 0b0000100;
-							}else if(FSR[code->operand1] == 0x0F){						//Status Affect: DC
-								FSR[STATUS] == FSR[STATUS] | 0b00000010;
-							}else if(FSR[code->operand1] == 0xFF){						//Status Affect: C
-								FSR[STATUS] == FSR[STATUS] | 0b00000001;
-							}
+						if((temp1 >> 7) != (temp1 >>8)){						//Status Affect: OV
+							FSR[STATUS] = FSR[STATUS] | 0b00001000;
 						}
-					}else{
-						if(FSR[BSR] >= 0 && FSR[BSR] <= 15){
-							FSR[code->operand1 + (FSR[BSR]<<8)] = ~(FSR[code->operand1 + (FSR[BSR]<<8)]) + 1;
-							if(FSR[code->operand1 + (FSR[BSR]<<8)] <= -1){					//Status Affect: N
-								FSR[STATUS] == FSR[STATUS] | 0b00010000;				
-							}else if(FSR[code->operand1 + (FSR[BSR]<<8)] >= 0x81){		//Status Affect: OV
-								FSR[STATUS] == FSR[STATUS] | 0b00001000;
-							}else if(FSR[code->operand1 + (FSR[BSR]<<8)] == 0){			//Status Affect: Z
-								FSR[STATUS] == FSR[STATUS] | 0b0000100;
-							}else if(FSR[code->operand1 + (FSR[BSR]<<8)] == 0x0F){		//Status Affect: DC
-								FSR[STATUS] == FSR[STATUS] | 0b00000010;
-							}else if(FSR[code->operand1 + (FSR[BSR]<<8)] == 0xFF){		//Status Affect: C
-								FSR[STATUS] == FSR[STATUS] | 0b00000001;
-							}
+						if(FSR[code->operand1] == 0){							//Status Affect: Z
+							FSR[STATUS] = FSR[STATUS] | 0b00000100;
 						}
-						else
-							Throw(ERROR_BSR);
+						if(FSR[code->operand1] & 0x0f){							//Status Affect: DC
+							FSR[STATUS] = FSR[STATUS] | 0b00000010;
+						}
+						if((temp1 >> 9) == 1){									//Status Affect: C
+							FSR[STATUS] = FSR[STATUS] | 0b00000001;
+						}
+						return code->absoluteAddress += 1;
 					}
-				}
-				if(code->operand2 == -1){
-					if(code->operand3 == ACCESS || code->operand3 == -1 || code->operand3 == 0){
-						if(code->operand1 < 0x80){
-							FSR[code->operand1] = ~(FSR[code->operand1]) + 1;
-							if(FSR[code->operand1] <= -1){								//Status Affect: N
-								FSR[STATUS] == FSR[STATUS] | 0b00010000;
-							}else if(FSR[code->operand1] >= 0x81){						//Status Affect: OV
-								FSR[STATUS] == FSR[STATUS] | 0b00001000;
-							}else if(FSR[code->operand1] == 0){							//Status Affect: Z
-								FSR[STATUS] == FSR[STATUS] | 0b00000100;
-							}else if(FSR[code->operand1] == 0x0F){						//Status Affect: DC
-								FSR[STATUS] == FSR[STATUS] | 0b00000010;
-							}else if(FSR[code->operand1] == 0xFF){						//Status Affect: C
-								FSR[STATUS] == FSR[STATUS] | 0b00000001;
-							}
+					else{
+						temp1 = ~(FSR[code->operand1 + (0x0F00)]) + 1;
+						FSR[code->operand1 + (0x0F00)] = temp1;
+						if(FSR[code->operand1 + (0x0F00)] <= -1){				//Status Affect: N
+							FSR[STATUS] = FSR[STATUS] | 0b00010000;	
 						}
-						else{
-							FSR[code->operand1 + (0x0F00)] = ~(FSR[code->operand1 + (0x0F00)]) + 1;
-							if(FSR[code->operand1 + (0x0F00)] <= -1){					//Status Affect: N
-								FSR[STATUS] == FSR[STATUS] | 0b00010000;	
-							}else if(FSR[code->operand1 + (0x0F00)] >= 0x81){			//Status Affect: OV
-								FSR[STATUS] == FSR[STATUS] | 0b00001000;
-							}else if(FSR[code->operand1 + (0x0F00)] == 0){				//Status Affect: Z
-								FSR[STATUS] == FSR[STATUS] | 0b0000100;
-							}else if(FSR[code->operand1] == 0x0F){						//Status Affect: DC
-								FSR[STATUS] == FSR[STATUS] | 0b00000010;
-							}else if(FSR[code->operand1] == 0xFF){						//Status Affect: C
-								FSR[STATUS] == FSR[STATUS] | 0b00000001;
-							}
+						if((temp1 >> 7) != (temp1 >> 8)){						//Status Affect: OV
+							FSR[STATUS] = FSR[STATUS] | 0b00001000;
 						}
-					}else{
-						if(FSR[BSR] >= 0 && FSR[BSR] <= 15){
-							FSR[code->operand1 + (FSR[BSR]<<8)] = ~(FSR[code->operand1 + (FSR[BSR]<<8)]) + 1;
-							if(FSR[code->operand1 + (FSR[BSR]<<8)] <= -1){					//Status Affect: N
-								FSR[STATUS] == FSR[STATUS] | 0b00010000;				
-							}else if(FSR[code->operand1 + (FSR[BSR]<<8)] >= 0x81){			//Status Affect: OV
-								FSR[STATUS] == FSR[STATUS] | 0b00001000;
-							}else if(FSR[code->operand1 + (FSR[BSR]<<8)] == 0){				//Status Affect: Z
-								FSR[STATUS] == FSR[STATUS] | 0b0000100;
-							}else if(FSR[code->operand1 + (FSR[BSR]<<8)] == 0x0F){			//Status Affect: DC
-								FSR[STATUS] == FSR[STATUS] | 0b00000010;
-							}else if(FSR[code->operand1 + (FSR[BSR]<<8)] == 0xFF){			//Status Affect: C
-								FSR[STATUS] == FSR[STATUS] | 0b00000001;
-							}
+						if(FSR[code->operand1 + (0x0F00)] == 0){				//Status Affect: Z
+							FSR[STATUS] = FSR[STATUS] | 0b0000100;
 						}
-						else
-							Throw(ERROR_BSR);
+						if(FSR[code->operand1 + (0x0F00)] & 0x0f){				//Status Affect: DC
+							FSR[STATUS] = FSR[STATUS] | 0b00000010;
+						}
+						if((temp1 >> 9) == 1){									//Status Affect: C
+							FSR[STATUS] = FSR[STATUS] | 0b00000001;
+						}
+						return code->absoluteAddress += 1;
 					}
+				}else{
+					if(FSR[BSR] >= 0 && FSR[BSR] <= 15){
+						temp1 = ~(FSR[code->operand1 + (FSR[BSR]<<8)]) + 1;
+						FSR[code->operand1 + (FSR[BSR]<<8)] = temp1;
+						if(FSR[code->operand1 + (FSR[BSR]<<8)] <= -1){			//Status Affect: N
+							FSR[STATUS] = FSR[STATUS] | 0b00010000;				
+						}
+						if((temp1 >> 7) != (temp1 >> 8)){						//Status Affect: OV
+							FSR[STATUS] = FSR[STATUS] | 0b00001000;
+						}
+						if(FSR[code->operand1 + (FSR[BSR]<<8)] == 0){			//Status Affect: Z
+							FSR[STATUS] = FSR[STATUS] | 0b0000100;
+						}
+						if(FSR[code->operand1 + (FSR[BSR]<<8)] & 0x0f){			//Status Affect: DC
+							FSR[STATUS] = FSR[STATUS] | 0b00000010;
+						}
+						if((temp1 >> 9) == 1){									//Status Affect: C
+							FSR[STATUS] = FSR[STATUS] | 0b00000001;
+						}
+						return code->absoluteAddress += 1;
+					}
+					else
+						Throw(ERROR_BSR);
 				}
 			}
 			else
@@ -118,23 +105,3 @@ void negf(Bytecode *code){
 	else
 		Throw(ERROR_RANGE);
 }
-	/*if(code->operand1 <= 0 || code->operand1 >= 255){
-		Throw(ERROR_RANGE);
-	}else{
-		if((code->operand2 == 1 || code->operand2 == 0) && (code->operand3 == 0 || code->operand3 == 1)){
-			Throw(ERROR_OPERAND2);
-		}else if(code->operand2 == -1 && code->operand3 == -1){
-			Throw(ERROR_OPERAND3);
-		}else if((code->operand2 == 1 || code->operand2 == 0) && code->operand3 == -1){
-			Throw(ERROR_OPERAND2andOPERAND3);
-		}else if(FSR[BSR] > 15){
-			Throw(ERROR_BSR);
-		}else{
-			if(code->operand3 == 0){
-				FSR[code->operand1] = ~(FSR[code->operand1]) + 1;
-			}else{
-				FSR[code->operand1] = ~(FSR[code->operand1 + (FSR[BSR]<<8)]) + 1;
-			}
-		}
-	}
-}*/

@@ -7,37 +7,31 @@
   :line: 9
   :message: ''
 - :test: test_clrf_should_throw_error_exception__if_operand2_more_than_1_and_less_than_negative_5
-  :line: 35
+  :line: 32
   :message: ''
-- :test: test_clrf_should_clear_fileReg_when_if_operand3_more_than_negative_5_and_1_and_is_negative_2_and_negative_3
-  :line: 61
-  :message: ''
-- :test: test_clrf_should_clear_fileReg_when_operand1_is_less_than_0x80_operand2_is_empty_and_operand3_is_0
-  :line: 87
-  :message: ''
-- :test: test_clrf_should_clear_fileReg_when_operand1_is_more_than_0x80_operand2_is_empty_and_operand3_is_ACCESS
-  :line: 108
-  :message: ''
-- :test: test_clrf_should_clear_BSR_is_more_than_0_and_less_than_15_when_operand2_is_empty_and_operand3_is_1
-  :line: 129
+- :test: test_clrf_should_clear_fileReg_when_operand2_is_empty_and_operand3_is_empty
+  :line: 58
   :message: ''
 - :test: test_clrf_should_clear_fileReg_when_operand1_is_less_than_0x80_and_operand2_is_0_and_operand3_is_empty
-  :line: 150
+  :line: 82
   :message: ''
 - :test: test_clrf_should_clear_fileReg_when_operand1_is_more_than_0x80_and_operand2_is_ACCESS_and_operand3_is_empty
-  :line: 170
+  :line: 105
   :message: ''
 - :test: test_clrf_should_clear_BSR_is_more_than_0_and_less_than_15_when_operand2_is_BANKED_and_operand3_is_empty
-  :line: 190
+  :line: 128
+  :message: ''
+- :test: test_clrf_should_throw_exception_when_operand3_is_not_empty
+  :line: 152
   :message: ''
 - :test: test_clrf_should_throw_exception_error_BSR_more_than_15
-  :line: 211
+  :line: 177
   :message: ''
 :failures: []
 :ignores: []
 :counts:
-  :total: 10
-  :passed: 10
+  :total: 8
+  :passed: 8
   :failed: 0
   :ignored: 0
 :stdout: []

@@ -13,15 +13,12 @@ void test_bcf_should_throw_error_exception__if_operand1_over_range(){
                       .name = "bcf"
                      };	
   Bytecode code = { .instruction = &inst,
-                    .operand1 = 0xfff,
+                    .operand1 = 0xffff,
 					.operand2 = 0,
 					.operand3 = ACCESS
                   };
   int exception;
-  
-  // Test BCF of the bytecode			  
-  FSR[code.operand1] = 0x53;
-  
+
   // Unit test
   Try{
 	bcf(&code);
@@ -98,10 +95,12 @@ void test_bcf_should_clear_seventh_bit_to_0_when_operand1_is_less_than_80_operan
 	
   // Test BCF of the bytecode
   FSR[code.operand1] = 0xC7;
+  code.absoluteAddress = 0x10;
   bcf(&code);
 	
   // Unit test
   TEST_ASSERT_EQUAL_HEX8(0x47, FSR[code.operand1]);
+  TEST_ASSERT_EQUAL_HEX8(0x11, code.absoluteAddress);
 }
 
 void test_bcf_should_clear_sixth_bit_to_0_when_operand1_is_less_than_80_operand3_is_0() {
@@ -118,10 +117,12 @@ void test_bcf_should_clear_sixth_bit_to_0_when_operand1_is_less_than_80_operand3
 	
   // Test BCF of the bytecode
   FSR[code.operand1] = 0xD7;
+  code.absoluteAddress = 0x10;
   bcf(&code);
 	
   // Unit test
   TEST_ASSERT_EQUAL_HEX8(0x97, FSR[code.operand1]);
+  TEST_ASSERT_EQUAL_HEX8(0x11, code.absoluteAddress);
 }
 
 void test_bcf_should_clear_fifth_bit_to_0_when_operand1_is_less_than_80_operand3_is_ACCESS() {
@@ -138,10 +139,12 @@ void test_bcf_should_clear_fifth_bit_to_0_when_operand1_is_less_than_80_operand3
 	
   // Test BCF of the bytecode
   FSR[code.operand1] = 0xE7;
+  code.absoluteAddress = 0x10;
   bcf(&code);
 	
   // Unit test
   TEST_ASSERT_EQUAL_HEX8(0xC7, FSR[code.operand1]);
+  TEST_ASSERT_EQUAL_HEX8(0x11, code.absoluteAddress);
 }
 
 void test_bcf_should_clear_fourth_bit_to_0_when_operand1_is_less_than_80_operand3_is_ACCESS() {
@@ -158,10 +161,12 @@ void test_bcf_should_clear_fourth_bit_to_0_when_operand1_is_less_than_80_operand
 	
   // Test BCF of the bytecode
   FSR[code.operand1] = 0x57;
+  code.absoluteAddress = 0x10;
   bcf(&code);
 	
   // Unit test
   TEST_ASSERT_EQUAL_HEX8(0x47, FSR[code.operand1]);
+  TEST_ASSERT_EQUAL_HEX8(0x11, code.absoluteAddress);
 }
 
 void test_bcf_should_clear_third_bit_to_0_when_operand1_is_less_than_80_operand3_is_negative_1() {
@@ -178,10 +183,12 @@ void test_bcf_should_clear_third_bit_to_0_when_operand1_is_less_than_80_operand3
 	
   // Test BCF of the bytecode
   FSR[code.operand1] = 0xAC;
+  code.absoluteAddress = 0x10;
   bcf(&code);
 	
   // Unit test
   TEST_ASSERT_EQUAL_HEX8(0xA4, FSR[code.operand1]);
+  TEST_ASSERT_EQUAL_HEX8(0x11, code.absoluteAddress);
 }
 
 void test_bcf_should_clear_second_bit_to_0_when_operand1_is_less_than_80_operand3_is_ACCESS() {
@@ -198,10 +205,12 @@ void test_bcf_should_clear_second_bit_to_0_when_operand1_is_less_than_80_operand
 	
   // Test BCF of the bytecode
   FSR[code.operand1] = 0x7D;
+  code.absoluteAddress = 0x10;
   bcf(&code);
 	
   // Unit test
   TEST_ASSERT_EQUAL_HEX8(0x79, FSR[code.operand1]);
+  TEST_ASSERT_EQUAL_HEX8(0x11, code.absoluteAddress);
 }
 
 void test_bcf_should_clear_first_bit_to_0_when_operand1_is_less_than_80_operand3_is_negative_1() {
@@ -218,10 +227,12 @@ void test_bcf_should_clear_first_bit_to_0_when_operand1_is_less_than_80_operand3
 	
   // Test BCF of the bytecode
   FSR[code.operand1] = 0x6B;
+  code.absoluteAddress = 0x10;
   bcf(&code);
 	
   // Unit test
   TEST_ASSERT_EQUAL_HEX8(0x69, FSR[code.operand1]);
+  TEST_ASSERT_EQUAL_HEX8(0x11, code.absoluteAddress);
 }
 
 void test_bcf_should_clear_zero_bit_to_0_when_operand1_is_less_than_80_operand3_is_0() {
@@ -238,10 +249,12 @@ void test_bcf_should_clear_zero_bit_to_0_when_operand1_is_less_than_80_operand3_
 	
   // Test BCF of the bytecode
   FSR[code.operand1] = 0xE7;
+  code.absoluteAddress = 0x10;
   bcf(&code);
 	
   // Unit test
   TEST_ASSERT_EQUAL_HEX8(0xE6, FSR[code.operand1]);
+  TEST_ASSERT_EQUAL_HEX8(0x11, code.absoluteAddress);
 }
 
 void test_bcf_should_clear_seventh_bit_to_0_when_operand1_is_more_than_80_operand3_is_ACCESS(){
@@ -258,10 +271,12 @@ void test_bcf_should_clear_seventh_bit_to_0_when_operand1_is_more_than_80_operan
 	
   // Test BCF of the bytecode
   FSR[code.operand1 + (0x0F00)] = 0xC7;
+  code.absoluteAddress = 0x10;
   bcf(&code);
 	
   // Unit test
   TEST_ASSERT_EQUAL_HEX8(0x47, FSR[code.operand1 + (0x0F00)]);
+  TEST_ASSERT_EQUAL_HEX8(0x11, code.absoluteAddress);
 }
 
 void test_bcf_should_clear_sixth_bit_to_0_when_operand1_is_more_than_80_operand3_is_0() {
@@ -278,10 +293,12 @@ void test_bcf_should_clear_sixth_bit_to_0_when_operand1_is_more_than_80_operand3
 	
   // Test BCF of the bytecode
   FSR[code.operand1 + (0x0F00)] = 0xD7;
+  code.absoluteAddress = 0x10;
   bcf(&code);
 	
   // Unit test
   TEST_ASSERT_EQUAL_HEX8(0x97, FSR[code.operand1 + (0x0F00)]);
+  TEST_ASSERT_EQUAL_HEX8(0x11, code.absoluteAddress);
 }
 
 void test_bcf_should_clear_fifth_bit_to_0_when_operand1_is_more_than_80_operand3_is_ACCESS() {
@@ -298,10 +315,12 @@ void test_bcf_should_clear_fifth_bit_to_0_when_operand1_is_more_than_80_operand3
 	
   // Test BCF of the bytecode
   FSR[code.operand1 + (0x0F00)] = 0xE7;
+  code.absoluteAddress = 0x10;
   bcf(&code);
 	
   // Unit test
   TEST_ASSERT_EQUAL_HEX8(0xC7, FSR[code.operand1 + (0x0F00)]);
+  TEST_ASSERT_EQUAL_HEX8(0x11, code.absoluteAddress);
 }
 
 void test_bcf_should_clear_fourth_bit_to_0_when_operand1_is_more_than_80_operand3_is_ACCESS() {
@@ -318,10 +337,12 @@ void test_bcf_should_clear_fourth_bit_to_0_when_operand1_is_more_than_80_operand
 	
   // Test BCF of the bytecode
   FSR[code.operand1 + (0x0F00)] = 0x57;
+  code.absoluteAddress = 0x10;
   bcf(&code);
 	
   // Unit test
   TEST_ASSERT_EQUAL_HEX8(0x47, FSR[code.operand1 + (0x0F00)]);
+  TEST_ASSERT_EQUAL_HEX8(0x11, code.absoluteAddress);
 }
 
 void test_bcf_should_clear_third_bit_to_0_when_operand1_is_more_than_80_operand3_is_negative_1() {
@@ -338,10 +359,12 @@ void test_bcf_should_clear_third_bit_to_0_when_operand1_is_more_than_80_operand3
 	
   // Test BCF of the bytecode
   FSR[code.operand1 + (0x0F00)] = 0xAC;
+  code.absoluteAddress = 0x10;
   bcf(&code);
 	
   // Unit test
   TEST_ASSERT_EQUAL_HEX8(0xA4, FSR[code.operand1 + (0x0F00)]);
+  TEST_ASSERT_EQUAL_HEX8(0x11, code.absoluteAddress);
 }
 
 void test_bcf_should_clear_second_bit_to_0_when_operand1_is_more_than_80_operand3_is_ACCESS() {
@@ -358,10 +381,12 @@ void test_bcf_should_clear_second_bit_to_0_when_operand1_is_more_than_80_operand
 	
   // Test BCF of the bytecode
   FSR[code.operand1 + (0x0F00)] = 0x7D;
+  code.absoluteAddress = 0x10;
   bcf(&code);
 	
   // Unit test
   TEST_ASSERT_EQUAL_HEX8(0x79, FSR[code.operand1 + (0x0F00)]);
+  TEST_ASSERT_EQUAL_HEX8(0x11, code.absoluteAddress);
 }
 
 void test_bcf_should_clear_first_bit_to_0_when_operand1_is_more_than_80_operand3_is_negative_1() {
@@ -378,10 +403,12 @@ void test_bcf_should_clear_first_bit_to_0_when_operand1_is_more_than_80_operand3
 	
   // Test BCF of the bytecode
   FSR[code.operand1 + (0x0F00)] = 0x6B;
+  code.absoluteAddress = 0x10;
   bcf(&code);
 	
   // Unit test
   TEST_ASSERT_EQUAL_HEX8(0x69, FSR[code.operand1 + (0x0F00)]);
+  TEST_ASSERT_EQUAL_HEX8(0x11, code.absoluteAddress);
 }
 
 void test_bcf_should_clear_zero_bit_to_0_when_operand1_is_more_than_80_operand3_is_0() {
@@ -398,10 +425,12 @@ void test_bcf_should_clear_zero_bit_to_0_when_operand1_is_more_than_80_operand3_
 	
   // Test BCF of the bytecode
   FSR[code.operand1 + (0x0F00)] = 0xE7;
+  code.absoluteAddress = 0x10;
   bcf(&code);
 	
   // Unit test
   TEST_ASSERT_EQUAL_HEX8(0xE6, FSR[code.operand1 + (0x0F00)]);
+  TEST_ASSERT_EQUAL_HEX8(0x11, code.absoluteAddress);
 }
 
 void test_bcf_should_clear_seventh_bit_to_0_BSR_is_more_than_0_and_less_than_15_when_operand3_is_1() {
@@ -417,11 +446,14 @@ void test_bcf_should_clear_seventh_bit_to_0_BSR_is_more_than_0_and_less_than_15_
                   };
 	
   // Test BCF of the bytecode
+  FSR[BSR] = 0x0A;
   FSR[code.operand1 +(FSR[BSR]<<8)] = 0x8F;
+  code.absoluteAddress = 0x10;
   bcf(&code);
 	
   // Unit test
   TEST_ASSERT_EQUAL_HEX8(0x0F, FSR[code.operand1 + (FSR[BSR]<<8)]);
+  TEST_ASSERT_EQUAL_HEX8(0x11, code.absoluteAddress);
 }
 
 void test_bcf_should_clear_sixth_bit_to_0_BSR_is_more_than_0_and_less_than_15_when_operand3_is_BANKED() {
@@ -437,11 +469,14 @@ void test_bcf_should_clear_sixth_bit_to_0_BSR_is_more_than_0_and_less_than_15_wh
                   };
 	
   // Test BCF of the bytecode
+  FSR[BSR] = 0x0A;
   FSR[code.operand1 +(FSR[BSR]<<8)] = 0x72;
+  code.absoluteAddress = 0x10;
   bcf(&code);
 	
   // Unit test
   TEST_ASSERT_EQUAL_HEX8(0x32, FSR[code.operand1 + (FSR[BSR]<<8)]);
+  TEST_ASSERT_EQUAL_HEX8(0x11, code.absoluteAddress);
 }
 
 void test_bcf_should_clear_fifth_bit_to_0_BSR_is_more_than_0_and_less_than_15_when_operand3_is_negative_4() {
@@ -457,11 +492,14 @@ void test_bcf_should_clear_fifth_bit_to_0_BSR_is_more_than_0_and_less_than_15_wh
                   };
 	
   // Test BCF of the bytecode
+  FSR[BSR] = 0x0A;
   FSR[code.operand1+(FSR[BSR]<<8)] = 0x6A;
+  code.absoluteAddress = 0x10;
   bcf(&code);
 	
   // Unit test
   TEST_ASSERT_EQUAL_HEX8(0x4A, FSR[code.operand1 + (FSR[BSR]<<8)]);
+  TEST_ASSERT_EQUAL_HEX8(0x11, code.absoluteAddress);
 }
 
 void test_bcf_should_clear_fourth_bit_to_0_BSR_is_more_than_0_and_less_than_15_when_operand3_is_1() {
@@ -477,11 +515,14 @@ void test_bcf_should_clear_fourth_bit_to_0_BSR_is_more_than_0_and_less_than_15_w
                   };
 	
   // Test BCF of the bytecode
+  FSR[BSR] = 0x0A;
   FSR[code.operand1+(FSR[BSR]<<8)] = 0xD3;
+  code.absoluteAddress = 0x10;
   bcf(&code);
 	
   // Unit test
   TEST_ASSERT_EQUAL_HEX8(0xC3, FSR[code.operand1 + (FSR[BSR]<<8)]);
+  TEST_ASSERT_EQUAL_HEX8(0x11, code.absoluteAddress);
 }
 
 void test_bcf_should_clear_third_bit_to_0_BSR_is_more_than_0_and_less_than_15_when_operand3_is_BANKED() {
@@ -497,11 +538,14 @@ void test_bcf_should_clear_third_bit_to_0_BSR_is_more_than_0_and_less_than_15_wh
                   };
 	
   // Test BCF of the bytecode
+  FSR[BSR] = 0x0A;
   FSR[code.operand1+(FSR[BSR]<<8)] = 0xFB;
+  code.absoluteAddress = 0x10;
   bcf(&code);
 	
   // Unit test
   TEST_ASSERT_EQUAL_HEX8(0xF3, FSR[code.operand1 + (FSR[BSR]<<8)]);
+  TEST_ASSERT_EQUAL_HEX8(0x11, code.absoluteAddress);
 }
 
 void test_bcf_should_clear_second_bit_to_0_BSR_is_more_than_0_and_less_than_15_when_operand3_is_negative_4() {
@@ -517,11 +561,14 @@ void test_bcf_should_clear_second_bit_to_0_BSR_is_more_than_0_and_less_than_15_w
                   };
 	
   // Test BCF of the bytecode
+  FSR[BSR] = 0x0A;
   FSR[code.operand1+(FSR[BSR]<<8)] = 0xAF;
+  code.absoluteAddress = 0x10;
   bcf(&code);
 	
   // Unit test
   TEST_ASSERT_EQUAL_HEX8(0xAB, FSR[code.operand1 + (FSR[BSR]<<8)]);
+  TEST_ASSERT_EQUAL_HEX8(0x11, code.absoluteAddress);
 }
 
 void test_bcf_should_clear_first_bit_to_0_BSR_is_more_than_0_and_less_than_15_when_operand3_is_1() {
@@ -537,11 +584,14 @@ void test_bcf_should_clear_first_bit_to_0_BSR_is_more_than_0_and_less_than_15_wh
                   };
 	
   // Test BCF of the bytecode
+  FSR[BSR] = 0x0A;
   FSR[code.operand1+(FSR[BSR]<<8)] = 0xC3;
+  code.absoluteAddress = 0x10;
   bcf(&code);
 	
   // Unit test
   TEST_ASSERT_EQUAL_HEX8(0xC1, FSR[code.operand1 + (FSR[BSR]<<8)]);
+  TEST_ASSERT_EQUAL_HEX8(0x11, code.absoluteAddress);
 }
 
 void test_bcf_should_clear_zero_bit_to_0_BSR_is_more_than_0_and_less_than_15_when_operand3_is_1() {
@@ -557,11 +607,14 @@ void test_bcf_should_clear_zero_bit_to_0_BSR_is_more_than_0_and_less_than_15_whe
                   };
 	
   // Test BCF of the bytecode
+  FSR[BSR] = 0x0A;
   FSR[code.operand1+(FSR[BSR]<<8)] = 0x73;
+  code.absoluteAddress = 0x10;
   bcf(&code);
 	
   // Unit test
   TEST_ASSERT_EQUAL_HEX8(0x72, FSR[code.operand1 + (FSR[BSR]<<8)]);
+  TEST_ASSERT_EQUAL_HEX8(0x11, code.absoluteAddress);
 }
 
 void test_bcf_should_throw_exception_error_BSR_more_than_15() {

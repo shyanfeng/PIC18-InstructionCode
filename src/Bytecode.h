@@ -1,12 +1,24 @@
+/**
+ * Author: Lee Shyan Feng
+ * Email: shyanfeng@gmail.com
+ * Date: 2/3/2014
+ * Project name: PIC18 simulator
+ * Programme: Microeletronic with Embedded Technology
+ * Institution: Tunku Abdul Rahman University College
+ * Copyright: GPLv3
+ */
+
 #ifndef	__BYTECODE_H__
 #define	__BYTECODE_H__
+
+int pc;
+extern int pc;
 
 typedef enum	{
 					ERROR_RANGE,
 					ERROR_BSR,
 					ERROR_OPERAND2,
 					ERROR_OPERAND3,
-					ERROR_OPERAND2andOPERAND3
 				}ExceptionError;
 
 typedef enum	{

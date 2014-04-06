@@ -1,3 +1,13 @@
+/**
+ * Author: Lee Shyan Feng
+ * Email: shyanfeng@gmail.com
+ * Date: 2/3/2014
+ * Project name: PIC18 simulator
+ * Programme: Microeletronic with Embedded Technology
+ * Institution: Tunku Abdul Rahman University College
+ * Copyright: GPLv3
+ */
+
 #ifndef	__BCF_H__
 #define	__BCF_H__
 
@@ -6,6 +16,6 @@
 
 extern unsigned char FSR[];
 
-void bcf(Bytecode *code);
+int bcf(Bytecode *code);
 
 #endif	// __BCF_H__

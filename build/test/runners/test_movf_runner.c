@@ -34,7 +34,7 @@ char* GlobalOrderError;
 //=======External Functions This Runner Calls=====
 extern void setUp(void);
 extern void tearDown(void);
-extern void test_movf_should_throw_error_exception__if_operand1_over_range(void);
+extern void test_movf_should_throw_error_exception_if_operand1_over_range(void);
 extern void test_movf_should_throw_error_exception_if_operand2_more_than_1_and_less_than_negative_5(void);
 extern void test_movf_should_throw_error_exception__if_operand3_more_than_negative_5_and_1_and_is_negative_2_and_negative_3(void);
 extern void test_movf_should_move_fileReg_to_WREG_when_operand1_less_than_0x80_and_operand2_is_0_and_operand3_is_0(void);
@@ -59,16 +59,16 @@ int main(void)
 {
   Unity.TestFile = "test_movf.c";
   UnityBegin();
-  RUN_TEST(test_movf_should_throw_error_exception__if_operand1_over_range, 9);
-  RUN_TEST(test_movf_should_throw_error_exception_if_operand2_more_than_1_and_less_than_negative_5, 34);
-  RUN_TEST(test_movf_should_throw_error_exception__if_operand3_more_than_negative_5_and_1_and_is_negative_2_and_negative_3, 60);
-  RUN_TEST(test_movf_should_move_fileReg_to_WREG_when_operand1_less_than_0x80_and_operand2_is_0_and_operand3_is_0, 86);
+  RUN_TEST(test_movf_should_throw_error_exception_if_operand1_over_range, 9);
+  RUN_TEST(test_movf_should_throw_error_exception_if_operand2_more_than_1_and_less_than_negative_5, 31);
+  RUN_TEST(test_movf_should_throw_error_exception__if_operand3_more_than_negative_5_and_1_and_is_negative_2_and_negative_3, 57);
+  RUN_TEST(test_movf_should_move_fileReg_to_WREG_when_operand1_less_than_0x80_and_operand2_is_0_and_operand3_is_0, 83);
   RUN_TEST(test_movf_should_move_fileReg_to_WREG_when_operand1_more_than_0x80_and_operand2_is_0_and_operand3_is_0, 106);
-  RUN_TEST(test_movf_should_move_fileReg_to_fileReg_when_operand1_less_than_0x80_and_operand2_is_F_and_operand3_is_ACCESS, 126);
-  RUN_TEST(test_movf_should_move_fileReg_to_fileReg_when_operand1_more_than_0x80_and_operand2_is_F_and_operand3_is_ACCESS, 146);
-  RUN_TEST(test_movf_should_move_fileReg_to_WREG_BSR_when_operand2_is_0_and_operand3_is_1, 166);
-  RUN_TEST(test_movf_should_move_fileReg_to_fileReg_BSR_when_operand2_is_F_and_operand3_is_BANKED, 186);
-  RUN_TEST(test_movf_should_throw_exception_error_BSR_more_than_15, 206);
+  RUN_TEST(test_movf_should_move_fileReg_to_fileReg_when_operand1_less_than_0x80_and_operand2_is_F_and_operand3_is_ACCESS, 129);
+  RUN_TEST(test_movf_should_move_fileReg_to_fileReg_when_operand1_more_than_0x80_and_operand2_is_F_and_operand3_is_ACCESS, 152);
+  RUN_TEST(test_movf_should_move_fileReg_to_WREG_BSR_when_operand2_is_0_and_operand3_is_1, 175);
+  RUN_TEST(test_movf_should_move_fileReg_to_fileReg_BSR_when_operand2_is_F_and_operand3_is_BANKED, 199);
+  RUN_TEST(test_movf_should_throw_exception_error_BSR_more_than_15, 223);
 
   return (UnityEnd());
 }
